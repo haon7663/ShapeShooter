@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(DrawPolygon))]
 public class Health : MonoBehaviour
 {
     private DrawPolygon m_DrawPolygon;
@@ -15,14 +14,16 @@ public class Health : MonoBehaviour
         m_DrawPolygon = GetComponent<DrawPolygon>();
     }
 
-    private void OnDamage(float dam)
+    public void OnDamage(float dam)
     {
         curhp -= dam;
-        if(curhp < 0)
+        m_DrawPolygon.OnDamage();
+        if (curhp < 0)
         {
             curhp = maxhp;
             m_DrawPolygon.m_AngleCount--;
-            if(m_DrawPolygon.m_AngleCount < 3)
+            m_DrawPolygon.ChangeAngle();
+            if (m_DrawPolygon.m_AngleCount < 3)
             {
                 Destroy(gameObject);
             }

@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FireProjectile : MonoBehaviour
-{
+{    
+    private Rotatement m_Rotatement;
+
     private List<GameObject>[] pools;
+
     private Transform m_ProjectileBundle;
 
     [Space]
@@ -13,13 +16,16 @@ public class FireProjectile : MonoBehaviour
 
     [Space]
     [Header("Stats")]
-    public float m_AttackSpeed;
+    public float m_Speed;
+    public int m_Count;
+    public float m_SpreadAngle;
 
     private float attackDelay;
 
     private void Start()
     {
         m_ProjectileBundle = GameObject.FindGameObjectWithTag("ProjectileBundle").transform;
+        m_Rotatement = GetComponent<Rotatement>();
         pools = new List<GameObject>[m_Projectile.Length];
         for (int i = 0; i < pools.Length; i++)
         {
@@ -31,13 +37,16 @@ public class FireProjectile : MonoBehaviour
     {
         if(Input.GetMouseButton(0) && attackDelay < 0)
         {
-            Get(0);
-            attackDelay = m_AttackSpeed;
+            for(int i = 0; i < m_Count; i++)
+            {
+                Get(0, transform.position, Quaternion.Euler(0, 0, m_Rotatement.m_Angle + m_SpreadAngle * (i - (m_Count-1)/2)));
+            }
+            attackDelay = m_Speed;
         }
         attackDelay -= Time.deltaTime;
     }
 
-    public void Get(int index)
+    public void Get(int index, Vector3 pos, Quaternion rot)
     {
         GameObject select = null;
 
@@ -58,6 +67,6 @@ public class FireProjectile : MonoBehaviour
         }
 
         select.transform.SetParent(m_ProjectileBundle);
-        select.transform.SetPositionAndRotation(transform.position + transform.right, transform.rotation);
+        select.transform.SetPositionAndRotation(pos + transform.right, rot);
     }
 }

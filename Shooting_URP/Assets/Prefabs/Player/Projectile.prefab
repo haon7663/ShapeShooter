@@ -49,6 +49,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Speed: 35
   m_Damage: 5
+  isPlayer: 1
+  isPenetrate: 0
 --- !u!50 &-2984050382245306933
 Rigidbody2D:
   serializedVersion: 4
