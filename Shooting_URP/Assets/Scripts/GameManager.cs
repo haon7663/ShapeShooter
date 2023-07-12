@@ -1,0 +1,30 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GameManager : MonoBehaviour
+{
+    public static GameManager instance;
+
+    public List<GameObject> Enemys;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+}
+
+internal static class YieldInstructionCache
+{
+    public static readonly WaitForEndOfFrame WaitForEndOfFrame = new WaitForEndOfFrame();
+    public static readonly WaitForFixedUpdate WaitForFixedUpdate = new WaitForFixedUpdate();
+    private static readonly Dictionary<float, WaitForSeconds> waitForSeconds = new Dictionary<float, WaitForSeconds>();
+
+    public static WaitForSeconds WaitForSeconds(float seconds)
+    {
+        WaitForSeconds wfs;
+        if (!waitForSeconds.TryGetValue(seconds, out wfs))
+            waitForSeconds.Add(seconds, wfs = new WaitForSeconds(seconds));
+        return wfs;
+    }
+}

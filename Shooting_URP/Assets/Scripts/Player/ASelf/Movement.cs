@@ -8,8 +8,10 @@ public class Movement : MonoBehaviour
     private Rigidbody2D m_Rigidbody2D;
     private Transform m_PlayerSprite;
 
+    public LayerMask m_WallLayer;
+
     [Space]
-    [Header("Stats")]
+    [Header("½ºÅÈ")]
     public float m_Speed;
     public float m_RotateSpeed;
 
@@ -32,5 +34,12 @@ public class Movement : MonoBehaviour
 
         m_PlayerSprite.Rotate(new Vector3(0, 0, (m_Rigidbody2D.velocity.x > 0 ? m_Rigidbody2D.velocity.x : -m_Rigidbody2D.velocity.x) + 
                                                 (m_Rigidbody2D.velocity.y > 0 ? m_Rigidbody2D.velocity.y : -m_Rigidbody2D.velocity.y)) * m_RotateSpeed);
+
+        var wallhit = Physics2D.OverlapCircle(transform.position, 0.3f, m_WallLayer);
+        if (wallhit)
+        {
+            m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, wallhit.transform.localPosition.z == 1 ? y < 0 ? 0 : m_Rigidbody2D.velocity.y
+                                                                                                             : y > 0 ? 0 : m_Rigidbody2D.velocity.y);
+        }
     }
 }

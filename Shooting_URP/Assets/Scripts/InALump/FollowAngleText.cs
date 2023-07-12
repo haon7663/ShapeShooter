@@ -5,10 +5,13 @@ using UnityEngine.UI;
 
 public class FollowAngleText : MonoBehaviour
 {
+    private List<GameObject> pools;
+
     public Text m_Text;
 
-    private List<GameObject> pools;
-    
+    private Text m_SelectText;
+    private DrawPolygon m_DrawPolygon;
+
     private Camera m_MainCamera;
     private Transform m_Canvas;
 
@@ -20,6 +23,7 @@ public class FollowAngleText : MonoBehaviour
 
         m_MainCamera = Camera.main;
         m_Canvas = GameObject.FindGameObjectWithTag("Canvas").transform;
+        m_DrawPolygon = GetComponentInChildren<DrawPolygon>();
     }
 
     private void OnEnable()
@@ -30,6 +34,7 @@ public class FollowAngleText : MonoBehaviour
     private void LateUpdate()
     {
         select.transform.position = m_MainCamera.WorldToScreenPoint(transform.position);
+        m_SelectText.text = m_DrawPolygon.m_AngleCount.ToString();
     }
 
     public void Get()
@@ -54,5 +59,11 @@ public class FollowAngleText : MonoBehaviour
 
         select.transform.SetParent(m_Canvas);
         select.transform.position = m_MainCamera.WorldToScreenPoint(transform.position);
+        m_SelectText = select.GetComponent<Text>();
+    }
+
+    private void OnDisable()
+    {
+        select.SetActive(false);
     }
 }

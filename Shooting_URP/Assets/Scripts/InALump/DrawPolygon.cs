@@ -15,6 +15,8 @@ public class DrawPolygon : MonoBehaviour
 
     public float hitTime;
 
+    public bool isPlayer;
+
     Vector2[] saveLerp;
     Color saveStartColor, saveEndColor;
     float angle, size;
@@ -50,19 +52,19 @@ public class DrawPolygon : MonoBehaviour
             saveLerp[i] = Vector2.Lerp(saveLerp[i], new Vector3(m_Size * Mathf.Sin(angle * i * Mathf.Deg2Rad), m_Size * Mathf.Cos(angle * i * Mathf.Deg2Rad)), Time.deltaTime * 9f);
             m_LineRenderer.SetPosition(i, saveLerp[i]);
             var myPoints = m_PolygonCollider2D.points;
-            myPoints[i] = new Vector2(m_Size * Mathf.Sin(angle * i * Mathf.Deg2Rad), m_Size * Mathf.Cos(angle * i * Mathf.Deg2Rad));
+            myPoints[i] = new Vector2(m_Size * Mathf.Sin(angle * i * Mathf.Deg2Rad), m_Size * Mathf.Cos(angle * i * Mathf.Deg2Rad)) * (isPlayer ? 0.25f : 1);
             m_PolygonCollider2D.points = myPoints;
             lastIndex++;
         }
         var lastPoints = m_PolygonCollider2D.points;
-        lastPoints[lastIndex] = new Vector2(0, m_Size);
+        lastPoints[lastIndex] = new Vector2(0, m_Size) * (isPlayer ? 0.25f : 1);
         m_PolygonCollider2D.points = lastPoints;
     }
 
     public void OnDamage()
     {
         hitTime = 0.05f;
-        DOVirtual.Float(m_Size * 1.8f + 0.5f, size, 0.15f, ReSize).SetEase(Ease.OutExpo);
+        DOVirtual.Float(size * 1.8f + 0.5f, size, 0.15f, ReSize).SetEase(Ease.OutExpo);
     }
     public void ChangeAngle()
     {
@@ -72,7 +74,7 @@ public class DrawPolygon : MonoBehaviour
         m_LineRenderer.positionCount = m_AngleCount;
         Array.Resize(ref saveLerp, m_AngleCount);
 
-        DOVirtual.Float(m_Size * 2.25f + 1f, size, 0.6f, ReSize).SetEase(Ease.OutExpo);
+        DOVirtual.Float(size * 2.25f + 1f, size, 0.6f, ReSize).SetEase(Ease.OutExpo);
     }
 
     void ReSize(float x)

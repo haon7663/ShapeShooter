@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireProjectile : MonoBehaviour
-{    
-    private Rotatement m_Rotatement;
-
+public class MachineTower : MonoBehaviour
+{
     private List<GameObject> pools;
 
     private Transform m_ProjectileBundle;
@@ -21,23 +19,24 @@ public class FireProjectile : MonoBehaviour
     public int m_MultiCount;
     [Header("ÅºÆÛÁü")]
     public float m_SpreadAngle;
+    [Header("·£´ýÅºÆÛÁü")]
+    public float m_RandomSpread;
 
     private float attackDelay;
 
     private void Start()
     {
         m_ProjectileBundle = GameObject.FindGameObjectWithTag("ProjectileBundle").transform;
-        m_Rotatement = GetComponent<Rotatement>();
         pools = new List<GameObject>();
     }
 
     private void Update()
     {
-        if(Input.GetMouseButton(0) && attackDelay < 0)
+        if (attackDelay < 0)
         {
-            for(int i = 0; i < m_MultiCount; i++)
+            for (int i = 0; i < m_MultiCount; i++)
             {
-                Get(transform.position, Quaternion.Euler(0, 0, m_Rotatement.m_Angle + m_SpreadAngle * (i - (m_MultiCount-1)/2)));
+                Get(transform.position, Quaternion.Euler(0, 0, m_SpreadAngle * (i - (m_MultiCount - 1) / 2) + Random.Range(m_RandomSpread, -m_RandomSpread)));
             }
             attackDelay = m_Speed;
         }

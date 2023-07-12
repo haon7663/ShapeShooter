@@ -1,47 +1,63 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireProjectile : MonoBehaviour
-{    
-    private Rotatement m_Rotatement;
-
+public class EnemyFire : MonoBehaviour
+{
+    private EnemyRotatement m_Rotatement;
     private List<GameObject> pools;
-
     private Transform m_ProjectileBundle;
 
     [Space]
     [Header("투사체")]
     public GameObject m_Projectile;
-
     [Space]
     [Header("공격속도")]
     public float m_Speed;
+    [Header("버스트")]
+    public int m_BurstCount;
+    [Header("버스트속도")]
+    public float m_BurstSpeed;
     [Header("멀티샷")]
     public int m_MultiCount;
     [Header("탄퍼짐")]
     public float m_SpreadAngle;
 
+    [HideInInspector] public bool isShoting;
     private float attackDelay;
 
     private void Start()
     {
+        m_Rotatement = GetComponent<EnemyRotatement>();
         m_ProjectileBundle = GameObject.FindGameObjectWithTag("ProjectileBundle").transform;
-        m_Rotatement = GetComponent<Rotatement>();
+
         pools = new List<GameObject>();
     }
 
     private void Update()
     {
-        if(Input.GetMouseButton(0) && attackDelay < 0)
+        if (attackDelay < 0)
         {
-            for(int i = 0; i < m_MultiCount; i++)
-            {
-                Get(transform.position, Quaternion.Euler(0, 0, m_Rotatement.m_Angle + m_SpreadAngle * (i - (m_MultiCount-1)/2)));
-            }
-            attackDelay = m_Speed;
+            StartCoroutine(Shot(m_Rotatement.isAttackRound ? Vector3.zero : transform.right));
         }
         attackDelay -= Time.deltaTime;
+    }
+
+    private IEnumerator Shot(Vector2 pos)
+    {
+        isShoting = true;
+        attackDelay = m_Speed;
+        for (int i = 0; i < m_BurstCount; i++)
+        {
+            for (int j = 0; j < m_MultiCount; j++)
+            {
+                Get(pos, Quaternion.Euler(0, 0, transform.localEulerAngles.z + m_SpreadAngle * (j - (m_MultiCount - 1) / 2)));
+            }
+            yield return YieldInstructionCache.WaitForSeconds(m_BurstSpeed);
+        }
+        isShoting = false;
+        yield return null;
     }
 
     public void Get(Vector3 pos, Quaternion rot)
@@ -65,6 +81,6 @@ public class FireProjectile : MonoBehaviour
         }
 
         select.transform.SetParent(m_ProjectileBundle);
-        select.transform.SetPositionAndRotation(pos + transform.right, rot);
+        select.transform.SetPositionAndRotation(m_Rotatement.isAttackRound ? pos + transform.position + transform.right : pos + transform.position, rot);
     }
 }

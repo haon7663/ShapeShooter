@@ -25,7 +25,7 @@ public class Health : MonoBehaviour
             m_DrawPolygon.ChangeAngle();
             if (m_DrawPolygon.m_AngleCount < 3)
             {
-                Destroy(gameObject);
+                transform.parent.gameObject.SetActive(false);
             }
         }
     }
