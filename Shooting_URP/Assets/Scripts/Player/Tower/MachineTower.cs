@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MachineTower : MonoBehaviour
 {
+    private Camera m_Camera;
+
     private List<GameObject> pools;
 
     private Transform m_ProjectileBundle;
@@ -24,19 +26,29 @@ public class MachineTower : MonoBehaviour
 
     private float attackDelay;
 
+    public float m_Angle;
+
+    Vector2 mouse;
+
     private void Start()
     {
+        m_Camera = Camera.main;
+
         m_ProjectileBundle = GameObject.FindGameObjectWithTag("ProjectileBundle").transform;
         pools = new List<GameObject>();
     }
 
     private void Update()
     {
+        mouse = m_Camera.ScreenToWorldPoint(Input.mousePosition);
+        m_Angle = Mathf.Atan2(mouse.y - transform.position.y, mouse.x - transform.position.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(m_Angle, Vector3.forward);
+
         if (attackDelay < 0)
         {
             for (int i = 0; i < m_MultiCount; i++)
             {
-                Get(transform.position, Quaternion.Euler(0, 0, m_SpreadAngle * (i - (m_MultiCount - 1) / 2) + Random.Range(m_RandomSpread, -m_RandomSpread)));
+                Get(transform.position, Quaternion.Euler(0, 0, m_Angle + m_SpreadAngle * (i - (m_MultiCount - 1) / 2) + Random.Range(m_RandomSpread, -m_RandomSpread)));
             }
             attackDelay = m_Speed;
         }

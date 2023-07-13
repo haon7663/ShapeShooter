@@ -14,7 +14,6 @@ public class FollowUI : MonoBehaviour
 
     private Text m_SelectText;
     private Image m_SelectImage;
-    private Image m_ChildImage;
     private DrawPolygon m_DrawPolygon;
 
     private Camera m_MainCamera;
@@ -22,6 +21,8 @@ public class FollowUI : MonoBehaviour
 
     GameObject selectText;
     GameObject selectImage;
+
+    Vector3 hpPos = new Vector3(0, 0.5f);
 
     float hpLerp;
 
@@ -45,11 +46,10 @@ public class FollowUI : MonoBehaviour
         selectText.transform.position = m_MainCamera.WorldToScreenPoint(transform.position);
         m_SelectText.text = m_DrawPolygon.m_AngleCount.ToString();
 
-        selectImage.transform.position = m_MainCamera.WorldToScreenPoint(transform.position - new Vector3(0, 0.5f));
+        selectImage.transform.position = m_MainCamera.WorldToScreenPoint(transform.position - hpPos);
         hpLerp = Mathf.Lerp(hpLerp, m_Health.curhp / m_Health.maxhp, Time.deltaTime * 25);
-        m_ChildImage.fillAmount = hpLerp;
+        m_SelectImage.fillAmount = hpLerp;
     }
-
     public void Get()
     {
         selectText = null;
@@ -77,8 +77,7 @@ public class FollowUI : MonoBehaviour
         m_SelectText = selectText.GetComponent<Text>();
 
         selectImage.transform.SetParent(m_Canvas);
-        m_SelectImage = selectImage.GetComponent<Image>();
-        m_ChildImage = selectImage.transform.GetChild(0).GetComponent<Image>();
+        m_SelectImage = selectImage.transform.GetChild(0).GetComponent<Image>();
     }
 
     private void OnDisable()

@@ -10,6 +10,7 @@ public class EnemyExplosion : MonoBehaviour
     public GameObject m_Explosion;
     public GameObject m_ExplosionParticle;
     public float m_ExpRange;
+    public float m_Damage;
 
     bool isCalled;
     private void Start()
@@ -40,6 +41,7 @@ public class EnemyExplosion : MonoBehaviour
             Explosion ex = Instantiate(m_Explosion, transform.position, Quaternion.identity).GetComponent<Explosion>();
             ex.transform.rotation = transform.rotation;
             ex.m_Size = m_DrawPolygon.size;
+            ex.damage = m_Damage;
             ex.m_AngleCount = m_DrawPolygon.m_AngleCount < 3 ? 3 : m_DrawPolygon.m_AngleCount;
             Instantiate(m_ExplosionParticle, transform.position, Quaternion.identity);
             transform.parent.gameObject.SetActive(false);

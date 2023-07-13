@@ -13,8 +13,10 @@ public class Explosion : MonoBehaviour
 
     Vector2[] saveLerp;
     float angle;
+    bool isCalledPlayer = false;
 
     [HideInInspector] public float size;
+    [HideInInspector] public float damage;
 
     private void Start()
     {
@@ -45,24 +47,44 @@ public class Explosion : MonoBehaviour
                 saveLerp[j] = Vector2.Lerp(saveLerp[j], new Vector3(m_Size * Mathf.Sin(angle * j * Mathf.Deg2Rad), m_Size * Mathf.Cos(angle * j * Mathf.Deg2Rad)), Time.deltaTime * 9f);
                 m_LineRenderer.SetPosition(j, saveLerp[j]);
 
-                var myPoints = m_PolygonCollider2D.points;
-                myPoints[j] = new Vector2(size * Mathf.Sin(angle * j * Mathf.Deg2Rad), size * Mathf.Cos(angle * j * Mathf.Deg2Rad));
-                m_PolygonCollider2D.points = myPoints;
+                if (i <= 0.4f)
+                {
+                    var myPoints = m_PolygonCollider2D.points;
+                    myPoints[j] = new Vector3(m_Size * Mathf.Sin(angle * j * Mathf.Deg2Rad), m_Size * Mathf.Cos(angle * j * Mathf.Deg2Rad)) * 0.95f;
+                    m_PolygonCollider2D.points = myPoints;
+                }
 
                 lastIndex++;
             }
-            var lastPoints = m_PolygonCollider2D.points;
-            lastPoints[lastIndex] = new Vector2(0, m_Size);
-            m_PolygonCollider2D.points = lastPoints;
+            if (i <= 0.5f)
+            {
+                var lastPoints = m_PolygonCollider2D.points;
+                lastPoints[lastIndex] = new Vector2(0, m_Size) * 0.95f;
+                m_PolygonCollider2D.points = lastPoints;
+            }
 
-            m_Size = Mathf.Lerp(m_Size, size * 8, Time.deltaTime * 7);
-            if(i > 0.5f)
+            m_Size = Mathf.Lerp(m_Size, size * (m_AngleCount + 3), Time.deltaTime * 7);
+            if(i > 0.4f)
             {
                 m_LineRenderer.startColor = Color.Lerp(m_LineRenderer.startColor, new Color(1, 1, 1, -0.1f), Time.deltaTime * 9);
                 m_LineRenderer.endColor = Color.Lerp(m_LineRenderer.endColor, new Color(1, 1, 1, -0.1f), Time.deltaTime * 9);
+                m_PolygonCollider2D.enabled = false;
             }
             yield return YieldInstructionCache.WaitForFixedUpdate;
         }
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(!isCalledPlayer && collision.CompareTag("Player"))
+        {
+            isCalledPlayer = true;
+            collision.GetComponent<Health>().OnDamage(damage);
+        }
+        else if(collision.CompareTag("Enemy"))
+        {
+            collision.GetComponent<Health>().OnDamage(damage);
+        }
     }
 }

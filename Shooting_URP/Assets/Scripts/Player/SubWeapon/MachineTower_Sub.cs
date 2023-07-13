@@ -19,7 +19,7 @@ public class MachineTower_Sub : MonoBehaviour
     {
         for(int i = 0; i < towers.Length; i++)
         {
-            towers[i].transform.position = Vector2.Lerp(towers[i].transform.position, transform.position + m_TowerPosition[i] + new Vector3(Mathf.Sin(sine[i].x += Time.deltaTime), Mathf.Sin(sine[i].y += Time.deltaTime)) * 0.5f, Time.deltaTime*7);
+            towers[i].transform.position = Vector2.Lerp(towers[i].transform.position, transform.position + m_TowerPosition[i] + new Vector3(Mathf.Sin(sine[i].x += Time.deltaTime), Mathf.Sin(sine[i].y += Time.deltaTime)) * 0.34f, Time.deltaTime*15);
         }
     }
 

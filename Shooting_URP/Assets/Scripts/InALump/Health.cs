@@ -5,6 +5,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     private DrawPolygon m_DrawPolygon;
+    private Level m_PlayerLevel;
     public EnemyExplosion m_EnemyExplosion;
 
     public float maxhp;
@@ -15,6 +16,7 @@ public class Health : MonoBehaviour
     private void Start()
     {
         m_DrawPolygon = GetComponent<DrawPolygon>();
+        m_PlayerLevel = GameObject.FindGameObjectWithTag("Player").GetComponent<Level>();
     }
 
     public void OnDamage(float dam)
@@ -28,6 +30,7 @@ public class Health : MonoBehaviour
             m_DrawPolygon.ChangeAngle();
             if (m_DrawPolygon.m_AngleCount < 3)
             {
+                m_PlayerLevel.AddExp(10);
                 if (m_EnemyExplosion) m_EnemyExplosion.Explosion();
                 else
                 {

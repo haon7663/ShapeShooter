@@ -5,9 +5,11 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     private Rigidbody2D m_Rigidbody2D;
+    private Transform m_Line;
 
     public float m_Speed;
     public float m_Damage;
+    public float m_RotateSpeed;
 
     public bool isPlayer;
     public bool isPenetrate;
@@ -15,11 +17,14 @@ public class Projectile : MonoBehaviour
     private void Awake()
     {
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
+        m_Line = transform.GetChild(0);
     }
 
     private void FixedUpdate()
     {
-        m_Rigidbody2D.velocity = transform.right * m_Speed;
+        m_Rigidbody2D.velocity = transform.right * m_Speed * Time.deltaTime;
+        m_Line.Rotate(new Vector3(0, 0, (m_Rigidbody2D.velocity.x > 0 ? m_Rigidbody2D.velocity.x : -m_Rigidbody2D.velocity.x) +
+                                           (m_Rigidbody2D.velocity.y > 0 ? m_Rigidbody2D.velocity.y : -m_Rigidbody2D.velocity.y)) * m_RotateSpeed);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

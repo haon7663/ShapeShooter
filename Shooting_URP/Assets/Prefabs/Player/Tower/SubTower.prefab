@@ -46,10 +46,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Projectile: {fileID: 6408912043535063603, guid: 0724c9caaa4cd3c4599ca37896ec6a2d, type: 3}
-  m_Speed: 0.4
+  m_Speed: 0.15
   m_MultiCount: 1
   m_SpreadAngle: 0
   m_RandomSpread: 5
+  m_Angle: 0
 --- !u!120 &2888487658936162780
 LineRenderer:
   m_ObjectHideFlags: 0
