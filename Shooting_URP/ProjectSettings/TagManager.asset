@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - DestroyProjectile
   - Canvas
+  - Death
   layers:
   - Default
   - TransparentFX
@@ -44,6 +45,18 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 1839614339
+    locked: 0
+  - name: Bullet
+    uniqueID: 3520856679
+    locked: 0
+  - name: Effect
+    uniqueID: 4112546741
+    locked: 0
+  - name: Death
+    uniqueID: 4217373019
     locked: 0
   - name: UI
     uniqueID: 3515982389

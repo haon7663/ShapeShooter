@@ -40,4 +40,17 @@ public class Health : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Death"))
+        {
+            if (m_EnemyExplosion) m_EnemyExplosion.Explosion();
+            else
+            {
+                Instantiate(m_DestoryParticle, transform.position, Quaternion.identity);
+                transform.parent.gameObject.SetActive(false);
+            }
+        }
+    }
 }

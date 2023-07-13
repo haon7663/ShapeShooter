@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum AttackType
 {
-    Arrow, Double
+    Default, Arrow, Double, Shot
 }
 
 public class FireProjectile : MonoBehaviour
@@ -126,6 +126,7 @@ public class FireProjectile : MonoBehaviour
         }
 
         select.transform.SetParent(m_ProjectileBundle);
-        select.transform.SetPositionAndRotation(pos.position + pos.right*0.3f, rot);
+        select.transform.rotation = rot;
+        select.transform.position = pos.position + select.transform.right;
     }
 }

@@ -13,11 +13,18 @@ public class Projectile : MonoBehaviour
 
     public bool isPlayer;
     public bool isPenetrate;
+    public int m_PenetrateCount;
+    private int penetrateCount;
 
     private void Awake()
     {
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         m_Line = transform.GetChild(0);
+    }
+
+    private void OnEnable()
+    {
+        penetrateCount = m_PenetrateCount;
     }
 
     private void FixedUpdate()
@@ -31,7 +38,11 @@ public class Projectile : MonoBehaviour
         if(isPlayer && collision.CompareTag("Enemy"))
         {
             collision.GetComponent<Health>().OnDamage(m_Damage);
-            if(!isPenetrate)
+            if(isPenetrate && penetrateCount > 0)
+            {
+                penetrateCount--;
+            }
+            else
             {
                 ActiveDown();
             }
@@ -41,7 +52,7 @@ public class Projectile : MonoBehaviour
             collision.GetComponent<Health>().OnDamage(m_Damage);
             ActiveDown();
         }
-        else if (collision.CompareTag("DestroyProjectile"))
+        else if (collision.CompareTag("DestroyProjectile") || collision.CompareTag("Death"))
         {
             ActiveDown();
         }

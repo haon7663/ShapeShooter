@@ -71,14 +71,13 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -774110617
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Positions:
-  - {x: -0.2, y: -0.075, z: 0}
-  - {x: -0.2, y: 0.075, z: 0}
-  - {x: 0.2, y: 0.075, z: 0}
-  - {x: 0.2, y: -0.075, z: 0}
+  - {x: 0, y: 0.1435, z: 0}
+  - {x: -0.14, y: -0.084, z: 0}
+  - {x: 0.14, y: -0.084, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -149,7 +148,7 @@ GameObject:
   - component: {fileID: 8595223011594152422}
   - component: {fileID: 1262884908611318085}
   - component: {fileID: 682490362005492481}
-  - component: {fileID: 8595223011594152416}
+  - component: {fileID: 4284117734744559631}
   m_Layer: 0
   m_Name: Projectile_Double
   m_TagString: Untagged
@@ -185,11 +184,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e0c6f03223e0ac4fa5699e3031a8955, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Speed: 1700
+  m_Speed: 1250
   m_Damage: 5
-  m_RotateSpeed: 0
+  m_RotateSpeed: 1
   isPlayer: 1
   isPenetrate: 0
+  m_PenetrateCount: 0
 --- !u!50 &682490362005492481
 Rigidbody2D:
   serializedVersion: 4
@@ -217,8 +217,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &8595223011594152416
-BoxCollider2D:
+--- !u!58 &4284117734744559631
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -250,15 +250,5 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.25}
-  m_EdgeRadius: 0
+  m_Radius: 0.15
