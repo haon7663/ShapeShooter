@@ -75,7 +75,7 @@ public class DrawPolygon : MonoBehaviour
     public void OnDamage()
     {
         hitTime = 0.05f;
-        if(m_Size < size * 1.2f + 1.8f) m_Size = size * 2.1f + 0.7f;
+        if(m_Size < size * 1.2f + 1.8f) m_Size = size * 1.3f + 0.95f;
         //DOVirtual.Float(size * 1.8f + 0.5f, size, 0.15f, ReSize).SetEase(Ease.OutExpo);
     }
     public void ChangeAngle()

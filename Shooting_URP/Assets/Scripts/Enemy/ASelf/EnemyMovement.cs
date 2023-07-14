@@ -17,16 +17,15 @@ public class EnemyMovement : MonoBehaviour
     public MoveType m_MoveType;
 
     public LayerMask m_WallLayer;
+    private Camera m_Camera;
 
     [Space]
     [Header("스탯")]
     public float m_Speed;
     public float m_RotateSpeed = 0.4f;
 
-    [Space]
-    [Header("고정 X축 포지션")]
-    public float m_PinnedX;
-    public float m_PinnedY;
+    private float m_PinnedX;
+    private float m_PinnedY;
 
     private Transform m_Player;
     bool onFollow, onPinned;
@@ -35,12 +34,14 @@ public class EnemyMovement : MonoBehaviour
 
     private void Awake()
     {
+        m_Camera = Camera.main;
         m_Player = GameObject.FindGameObjectWithTag("Player").transform;
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
     }
     private void OnEnable()
     {
         m_EnemySprite = transform.GetChild(0);
+        m_PinnedX = -m_Camera.transform.position.x + transform.position.x - 10;
         m_PinnedY = transform.position.y;
 
         x = 0; y = 0;
@@ -75,6 +76,7 @@ public class EnemyMovement : MonoBehaviour
         else if(isPinned)
         {
             transform.position = Vector3.Lerp(transform.position, new Vector3(m_Player.transform.position.x + m_PinnedX, m_PinnedY), Time.deltaTime * 1.2f);
+            m_EnemySprite.Rotate(new Vector3(0, 0, 0.6f * m_RotateSpeed));
         }
         else
         {

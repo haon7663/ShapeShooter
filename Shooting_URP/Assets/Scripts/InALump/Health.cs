@@ -15,12 +15,14 @@ public class Health : MonoBehaviour
 
     public GameObject m_DestoryParticle;
 
+    public bool isPlayer;
+
     private void Start()
     {
         m_DrawPolygon = GetComponent<DrawPolygon>();
         m_FollowUI = GetComponentInParent<FollowUI>();
         m_PlayerLevel = GameObject.FindGameObjectWithTag("Player").GetComponent<Level>();
-        GameManager.instance.Enemys.Add(transform.parent.gameObject);
+        if(!isPlayer) GameManager.instance.Enemys.Add(transform.parent.gameObject);
     }
 
     private void OnEnable()
@@ -39,7 +41,6 @@ public class Health : MonoBehaviour
             m_DrawPolygon.ChangeAngle();
             if (m_DrawPolygon.m_AngleCount < 3)
             {
-                m_PlayerLevel.AddExp(10);
                 Death();
             }
         }
@@ -63,6 +64,7 @@ public class Health : MonoBehaviour
         if (m_EnemyExplosion) m_EnemyExplosion.Explosion();
         else
         {
+            if(!isPlayer && transform.parent.gameObject.activeSelf) m_PlayerLevel.AddExp(10);
             Instantiate(m_DestoryParticle, transform.position, Quaternion.identity);
             transform.parent.gameObject.SetActive(false);
         }

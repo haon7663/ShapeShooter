@@ -17,7 +17,7 @@ public class FireProjectile : MonoBehaviour
     private List<GameObject> pools;
 
     private Level m_Level;
-
+    private DrawPolygon m_DrawPolygon;
     private Transform m_ProjectileBundle;
 
     public AttackType m_AttackType;
@@ -77,17 +77,20 @@ public class FireProjectile : MonoBehaviour
     }
     public UpgradeStruct[] m_UpgradeStruct = new UpgradeStruct[1];
     public int m_WeaponLevel = 0;
-    private int[] upgradeCount;
+    private int[] upgradeCount = new int[5];
 
     private Rotatement[] m_Rotatement = new Rotatement[10];
     public int typeCount;
 
     float attackDelay;
+    Vector3[] weaponPos = new Vector3[5];
+    float[] sin = new float[5], absolute = new float[5];
     bool isShoting;
 
     private void Start()
     {
         m_Level = transform.parent.GetComponentInChildren<Level>();
+        m_DrawPolygon = transform.parent.GetComponentInChildren<DrawPolygon>();
         m_ProjectileBundle = GameObject.FindGameObjectWithTag("ProjectileBundle").transform;
         pools = new List<GameObject>();
 
@@ -105,37 +108,37 @@ public class FireProjectile : MonoBehaviour
             }
         }
 
-        if(typeint == typeCount)
+        if(typeint != 0 && typeint == typeCount)
         {
             var detail = m_UpgradeStruct[typeCount].m_DetailUpgrade;
             for(int i = 0; i < detail.Length; i++)
             {
-                if (detail[i].m_DelayCount >= upgradeCount[i])
+                if (detail[i].m_DelayCount > upgradeCount[i])
                 {
                     upgradeCount[i]++;
                 }
                 else
                 {
                     upgradeCount[i] = 0;
-                    switch (detail[m_WeaponLevel].m_UpgradeType.ToString())
+                    switch (detail[i].m_UpgradeType.ToString())
                     {
                         case "Damage":
-                            m_BulletStruct[typeCount].m_Damage += detail[m_WeaponLevel].m_Value;
+                            m_BulletStruct[typeCount].m_Damage += detail[i].m_Value;
                             break;
                         case "PenetrateCount":
-                            m_BulletStruct[typeCount].m_PenetrateCount += (int)detail[m_WeaponLevel].m_Value;
+                            m_BulletStruct[typeCount].m_PenetrateCount += (int)detail[i].m_Value;
                             break;
                         case "AttackDelay":
-                            m_BulletStruct[typeCount].m_AttackDelay += detail[m_WeaponLevel].m_Value;
+                            m_BulletStruct[typeCount].m_AttackDelay += detail[i].m_Value;
                             break;
                         case "BurstCount":
-                            m_BulletStruct[typeCount].m_BurstCount += (int)detail[m_WeaponLevel].m_Value;
+                            m_BulletStruct[typeCount].m_BurstCount += (int)detail[i].m_Value;
                             break;
                         case "MultiCount":
-                            m_BulletStruct[typeCount].m_MultiCount += (int)detail[m_WeaponLevel].m_Value;
+                            m_BulletStruct[typeCount].m_MultiCount += (int)detail[i].m_Value;
                             break;
                         case "SpreadAngle":
-                            m_BulletStruct[typeCount].m_SpreadAngle += (int)detail[m_WeaponLevel].m_Value;
+                            m_BulletStruct[typeCount].m_SpreadAngle += (int)detail[i].m_Value;
                             break;
                     }
                 }
@@ -163,13 +166,21 @@ public class FireProjectile : MonoBehaviour
             {
                 m_BulletStruct[typeCount].m_Weapon[i].gameObject.SetActive(true);
                 m_Rotatement[i] = m_BulletStruct[typeCount].m_Weapon[i].GetComponent<Rotatement>();
+                weaponPos[i] = m_Rotatement[i].transform.localPosition;
             }
         }
     }
 
     private void Update()
     {
-        if(Input.GetMouseButton(0) && attackDelay < 0)
+        for (int i = 0; i < m_BulletStruct[typeCount].m_Weapon.Length; i++)
+        {
+            m_Rotatement[i].transform.localPosition = weaponPos[i] + m_Rotatement[i].transform.right * Mathf.Sin(sin[i]) * Mathf.Abs(absolute[i]) / 3;
+            sin[i] -= 5 * Time.deltaTime;
+            absolute[i] = Mathf.Lerp(absolute[i], 0, Time.deltaTime * 10);
+        }
+
+        if (Input.GetMouseButton(0) && attackDelay < 0)
         {
             StartCoroutine(m_BulletStruct[typeCount].m_Weapon.Length == 1 ? Shot(0) : MultiGun());
         }
@@ -191,6 +202,8 @@ public class FireProjectile : MonoBehaviour
         attackDelay = m_BulletStruct[typeCount].m_AttackDelay;
         for (int i = 0; i < m_BulletStruct[typeCount].m_BurstCount; i++)
         {
+            sin[k] = -1;
+            absolute[k] += 1;
             for (int j = 0; j < m_BulletStruct[typeCount].m_MultiCount; j++)
             {
                 Get(m_BulletStruct[typeCount].m_Weapon[k], Quaternion.Euler(0, 0, m_Rotatement[k].m_Angle + m_BulletStruct[typeCount].m_SpreadAngle * (j - (m_BulletStruct[typeCount].m_MultiCount - 1) / 2)));
@@ -229,8 +242,9 @@ public class FireProjectile : MonoBehaviour
         projectile.speed = m_BulletStruct[typeCount].m_ProjectileSpeed;
         projectile.rotateSpeed = m_BulletStruct[typeCount].m_ProjectileRotate;
         projectile.isPlayer = true;
+        projectile.isTrail = typeCount == 1;
 
-        for(int i = 0; i < m_BulletStruct.Length; i++)
+        for (int i = 0; i < m_BulletStruct.Length; i++)
         {
             select.transform.GetChild(i).gameObject.SetActive(i == typeCount);
         }

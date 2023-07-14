@@ -5,8 +5,10 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     private Rigidbody2D m_Rigidbody2D;
+    public TrailRenderer m_TrailRenderer;
 
-    public Transform line;
+    [HideInInspector] public bool isTrail;
+    [HideInInspector] public Transform line;
     [HideInInspector] public bool isPlayer;
     [HideInInspector] public float speed;
     [HideInInspector] public float rotateSpeed;
@@ -17,6 +19,18 @@ public class Projectile : MonoBehaviour
     {
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         if (!line) line = transform.GetChild(0);
+    }
+    private void OnEnable()
+    {
+        if (isTrail)
+        {
+            m_TrailRenderer.enabled = false;
+            Invoke(nameof(OnTrail), m_TrailRenderer.time + 0.01f);
+        }
+    }
+    private void OnTrail()
+    {
+        m_TrailRenderer.enabled = true;
     }
 
     private void FixedUpdate()
