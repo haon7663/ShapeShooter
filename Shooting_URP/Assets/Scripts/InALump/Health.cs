@@ -6,8 +6,10 @@ public class Health : MonoBehaviour
 {
     private DrawPolygon m_DrawPolygon;
     private Level m_PlayerLevel;
+    [HideInInspector] public FollowUI m_FollowUI;
     public EnemyExplosion m_EnemyExplosion;
 
+    public float defhp;
     public float maxhp;
     public float curhp;
 
@@ -16,7 +18,14 @@ public class Health : MonoBehaviour
     private void Start()
     {
         m_DrawPolygon = GetComponent<DrawPolygon>();
+        m_FollowUI = GetComponentInParent<FollowUI>();
         m_PlayerLevel = GameObject.FindGameObjectWithTag("Player").GetComponent<Level>();
+        GameManager.instance.Enemys.Add(transform.parent.gameObject);
+    }
+
+    private void OnEnable()
+    {
+        curhp = maxhp;
     }
 
     public void OnDamage(float dam)
@@ -31,12 +40,7 @@ public class Health : MonoBehaviour
             if (m_DrawPolygon.m_AngleCount < 3)
             {
                 m_PlayerLevel.AddExp(10);
-                if (m_EnemyExplosion) m_EnemyExplosion.Explosion();
-                else
-                {
-                    Instantiate(m_DestoryParticle, transform.position, Quaternion.identity);
-                    transform.parent.gameObject.SetActive(false);
-                }
+                Death();
             }
         }
     }
@@ -45,12 +49,22 @@ public class Health : MonoBehaviour
     {
         if (collision.CompareTag("Death"))
         {
-            if (m_EnemyExplosion) m_EnemyExplosion.Explosion();
-            else
-            {
-                Instantiate(m_DestoryParticle, transform.position, Quaternion.identity);
-                transform.parent.gameObject.SetActive(false);
-            }
+            Death();
+        }
+    }
+
+    public void Death()
+    {
+        GameManager.instance.Enemys.Remove(transform.parent.gameObject);
+
+        m_FollowUI.selectImage.SetActive(false);
+        m_FollowUI.selectText.SetActive(false);
+
+        if (m_EnemyExplosion) m_EnemyExplosion.Explosion();
+        else
+        {
+            Instantiate(m_DestoryParticle, transform.position, Quaternion.identity);
+            transform.parent.gameObject.SetActive(false);
         }
     }
 }

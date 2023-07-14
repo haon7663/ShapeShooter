@@ -19,8 +19,8 @@ public class FollowUI : MonoBehaviour
     private Camera m_MainCamera;
     private Transform m_Canvas;
 
-    GameObject selectText;
-    GameObject selectImage;
+    [HideInInspector] public GameObject selectText;
+    [HideInInspector] public GameObject selectImage;
 
     Vector3 hpPos = new Vector3(0, 0.5f);
 
@@ -82,7 +82,7 @@ public class FollowUI : MonoBehaviour
 
     private void OnDisable()
     {
-        selectText.SetActive(false);
-        selectImage.SetActive(false);
+        //selectText.SetActive(false);
+        //selectImage.SetActive(false);
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyExplosion : MonoBehaviour
 {
     private DrawPolygon m_DrawPolygon;
+    private Health m_Health;
     private Transform m_Player;
 
     public GameObject m_Explosion;
@@ -16,6 +17,7 @@ public class EnemyExplosion : MonoBehaviour
     private void Start()
     {
         m_DrawPolygon = GetComponent<DrawPolygon>();
+        m_Health = GetComponent<Health>();
         m_Player = GameObject.FindGameObjectWithTag("Player").transform;
     }
     private void OnEnable()
@@ -44,6 +46,9 @@ public class EnemyExplosion : MonoBehaviour
             ex.damage = m_Damage;
             ex.m_AngleCount = m_DrawPolygon.m_AngleCount < 3 ? 3 : m_DrawPolygon.m_AngleCount;
             Instantiate(m_ExplosionParticle, transform.position, Quaternion.identity);
+
+            m_Health.m_FollowUI.selectImage.SetActive(false);
+            m_Health.m_FollowUI.selectText.SetActive(false);
             transform.parent.gameObject.SetActive(false);
         }
     }    
