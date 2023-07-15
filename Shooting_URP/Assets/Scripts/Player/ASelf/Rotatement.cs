@@ -36,7 +36,7 @@ public class Rotatement : MonoBehaviour
 
     public float m_Angle;
 
-    Vector2 mouse;
+    Vector2 target;
 
     private void Start()
     {
@@ -44,8 +44,9 @@ public class Rotatement : MonoBehaviour
     }
     private void Update()
     {
-        mouse = m_Camera.ScreenToWorldPoint(Input.mousePosition);
-        m_Angle = Mathf.Atan2(mouse.y - transform.position.y, mouse.x - transform.position.x) * Mathf.Rad2Deg;
+        target = m_Camera.ScreenToWorldPoint(Input.mousePosition);
+        //target = transform.position + new Vector3(1, 0);
+        m_Angle = Mathf.Atan2(target.y - transform.position.y, target.x - transform.position.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(m_Angle, Vector3.forward);
     }
 }

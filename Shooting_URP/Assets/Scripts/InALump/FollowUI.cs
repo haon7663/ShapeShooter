@@ -79,10 +79,4 @@ public class FollowUI : MonoBehaviour
         selectImage.transform.SetParent(m_Canvas);
         m_SelectImage = selectImage.transform.GetChild(0).GetComponent<Image>();
     }
-
-    private void OnDisable()
-    {
-        //selectText.SetActive(false);
-        //selectImage.SetActive(false);
-    }
 }

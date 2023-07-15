@@ -46,6 +46,7 @@ public class Projectile : MonoBehaviour
             collision.GetComponent<Health>().OnDamage(realDamage);
             if(penetrateCount > 0)
             {
+                realDamage *= 0.5f;
                 penetrateCount--;
             }
             else
@@ -58,7 +59,7 @@ public class Projectile : MonoBehaviour
             collision.GetComponent<Health>().OnDamage(realDamage);
             ActiveDown();
         }
-        else if (collision.CompareTag("DestroyProjectile") || collision.CompareTag("Death"))
+        else if (collision.CompareTag("DestroyProjectile") || collision.CompareTag("Death") || (collision.CompareTag("Ultimate") && !isPlayer))
         {
             ActiveDown();
         }

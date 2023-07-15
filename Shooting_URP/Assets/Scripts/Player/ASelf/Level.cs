@@ -30,11 +30,11 @@ public class Level : MonoBehaviour
     private void LateUpdate()
     {
         m_PersentHp = (m_DrawPolygon.m_AngleCount - 3) * 0.1f + 1;
-        m_PersentDamage = (m_DrawPolygon.m_AngleCount - 3) * 0.25f + 1;
+        m_PersentDamage = (m_DrawPolygon.m_AngleCount - 3) * 0.2f + 1;
 
         m_Health.maxhp = m_Health.defhp * m_PersentHp;
 
-        needExp = m_DrawPolygon.m_AngleCount * 30 - 50;
+        needExp = m_DrawPolygon.m_AngleCount * 30 - 40;
 
         m_ExpImage.transform.position = m_Camera.WorldToScreenPoint(transform.position + new Vector3(-0.4f, -0.5f));
         expLerp = Mathf.Lerp(expLerp, m_Exp / needExp, Time.deltaTime * 25);

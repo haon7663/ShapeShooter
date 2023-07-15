@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -38,10 +39,12 @@ public class GameManager : MonoBehaviour
         StartCoroutine(Waving());
     }
 
+
     private IEnumerator Waving()
     {
+        yield return YieldInstructionCache.WaitForSeconds(1f);
         int EnemyCount = 0;
-        for(float i = 0; i < 15; i += Time.deltaTime)
+        for(float i = 0; i < m_WaveStruct[m_WaveCount].m_DetailEnemy[m_WaveStruct[m_WaveCount].m_DetailEnemy.Length-1].m_DelayTime + 0.5f; i += Time.deltaTime)
         {
             var detail = m_WaveStruct[m_WaveCount].m_DetailEnemy;
             if (detail.Length > EnemyCount && !detail[EnemyCount].isCalled && i > detail[EnemyCount].m_DelayTime)
@@ -53,7 +56,10 @@ public class GameManager : MonoBehaviour
             yield return YieldInstructionCache.WaitForFixedUpdate;
         }
         while(Enemys.Count > 0) yield return YieldInstructionCache.WaitForFixedUpdate;
-        m_WaveCount++;
+        if(++m_WaveCount < m_WaveStruct.Length)
+        {
+            StartCoroutine(Waving());
+        }
     }    
 }
 

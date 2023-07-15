@@ -23,6 +23,7 @@ public class FireProjectile : MonoBehaviour
     public AttackType m_AttackType;
 
     public GameObject m_Projectile;
+
     [Serializable]
     public struct BulletStruct
     {
@@ -60,7 +61,7 @@ public class FireProjectile : MonoBehaviour
         public float m_RightPos;
     }
     public BulletStruct[] m_BulletStruct = new BulletStruct[1];
-
+    public BulletStruct[] m_OriginStruct;
 
     [Serializable]
     public struct DetailUpgradeStruct
@@ -76,6 +77,7 @@ public class FireProjectile : MonoBehaviour
         public DetailUpgradeStruct[] m_DetailUpgrade;
     }
     public UpgradeStruct[] m_UpgradeStruct = new UpgradeStruct[1];
+
     public int m_WeaponLevel = 0;
     private int[] upgradeCount = new int[5];
 
@@ -86,6 +88,15 @@ public class FireProjectile : MonoBehaviour
     Vector3[] weaponPos = new Vector3[5];
     float[] sin = new float[5], absolute = new float[5];
     bool isShoting;
+
+    private void Awake()
+    {
+        m_OriginStruct = new BulletStruct[m_BulletStruct.Length];
+        for(int i = 0; i < m_BulletStruct.Length; i++)
+        {
+            m_OriginStruct[i] = m_BulletStruct[i];
+        }
+    }
 
     private void Start()
     {
@@ -138,7 +149,7 @@ public class FireProjectile : MonoBehaviour
                             m_BulletStruct[typeCount].m_MultiCount += (int)detail[i].m_Value;
                             break;
                         case "SpreadAngle":
-                            m_BulletStruct[typeCount].m_SpreadAngle += (int)detail[i].m_Value;
+                            m_BulletStruct[typeCount].m_SpreadAngle += detail[i].m_Value;
                             break;
                     }
                 }

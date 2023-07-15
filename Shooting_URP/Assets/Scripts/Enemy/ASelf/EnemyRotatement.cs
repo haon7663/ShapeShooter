@@ -25,7 +25,7 @@ public class EnemyRotatement : MonoBehaviour
     {
         if (isAttackRound || !m_EnemyFire.isShoting)
         {
-            if (isLookat) target = m_Player.position;
+            if (isLookat && m_Player) target = m_Player.position;
             else if(!isLookat) target = transform.position + new Vector3(-2, 0);
             angle = Mathf.Atan2(target.y - transform.position.y, target.x - transform.position.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, angle), Time.deltaTime * 16);

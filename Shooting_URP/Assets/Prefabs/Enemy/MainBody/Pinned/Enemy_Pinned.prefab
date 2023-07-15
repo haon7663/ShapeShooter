@@ -144,8 +144,8 @@ MonoBehaviour:
   m_AttackDelay: 2
   m_BurstCount: 1
   m_BurstSpeed: 0.2
-  m_MultiCount: 5
-  m_SpreadAngle: 9
+  m_MultiCount: 3
+  m_SpreadAngle: 12
   isShoting: 0
 --- !u!114 &220029533532038235
 MonoBehaviour:
@@ -316,8 +316,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LineRenderer: {fileID: 0}
   m_FireLineRenderer: {fileID: 1116863429770322037}
+  m_LookLineRenderer: {fileID: 0}
   m_AngleCount: 5
-  m_Size: 0.3
+  m_Size: 0.45
   hitTime: 0
   isPlayer: 0
   size: 0
@@ -336,8 +337,9 @@ MonoBehaviour:
   m_FollowUI: {fileID: 0}
   m_EnemyExplosion: {fileID: 0}
   defhp: 0
-  maxhp: 25
-  curhp: 25
+  maxhp: 9
+  curhp: 9
+  exp: 10
   m_DestoryParticle: {fileID: 7972528174872875722, guid: 9ac742c501e4d504d88302923e006f2d, type: 3}
   isPlayer: 0
 --- !u!120 &220029533755202019

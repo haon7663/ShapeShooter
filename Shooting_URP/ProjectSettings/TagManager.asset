@@ -10,6 +10,7 @@ TagManager:
   - Canvas
   - Death
   - Item
+  - Ultimate
   layers:
   - Default
   - TransparentFX

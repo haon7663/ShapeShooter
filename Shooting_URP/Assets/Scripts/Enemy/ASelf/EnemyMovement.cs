@@ -67,16 +67,16 @@ public class EnemyMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (onFollow)
+        if (isPinned)
+        {
+            transform.position = Vector3.Lerp(transform.position, new Vector3(m_Player.transform.position.x + m_PinnedX, m_PinnedY), Time.deltaTime * 1.2f);
+            m_EnemySprite.Rotate(new Vector3(0, 0, 0.6f * m_RotateSpeed));
+        }
+        else if (onFollow)
         {
             float angle = Mathf.Atan2(m_Player.position.y - transform.position.y, m_Player.position.x - transform.position.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
             m_Rigidbody2D.velocity = transform.right * m_Speed * Time.deltaTime;
-        }
-        else if(isPinned)
-        {
-            transform.position = Vector3.Lerp(transform.position, new Vector3(m_Player.transform.position.x + m_PinnedX, m_PinnedY), Time.deltaTime * 1.2f);
-            m_EnemySprite.Rotate(new Vector3(0, 0, 0.6f * m_RotateSpeed));
         }
         else
         {

@@ -35,6 +35,7 @@ public class EnemyFire : MonoBehaviour
 
     [HideInInspector] public bool isShoting;
     private float attackDelay;
+    float sin, absolute;
 
     private void Start()
     {
@@ -46,6 +47,9 @@ public class EnemyFire : MonoBehaviour
 
     private void Update()
     {
+        m_Rotatement.transform.localPosition = Vector3.zero + m_Rotatement.transform.right * Mathf.Sin(sin) * Mathf.Abs(absolute) / 3;
+        sin -= 5 * Time.deltaTime;
+        absolute = Mathf.Lerp(absolute, 0, Time.deltaTime * 10);
         if (attackDelay < 0)
         {
             StartCoroutine(Shot(m_Rotatement.isAttackRound ? Vector3.zero : transform.right));
@@ -59,6 +63,8 @@ public class EnemyFire : MonoBehaviour
         attackDelay = m_AttackDelay;
         for (int i = 0; i < m_BurstCount; i++)
         {
+            sin = -1;
+            absolute += 1;
             for (int j = 0; j < m_MultiCount; j++)
             {
                 Get(pos, Quaternion.Euler(0, 0, transform.localEulerAngles.z + m_SpreadAngle * (j - (m_MultiCount - 1) / 2)));

@@ -8,6 +8,7 @@ public class DrawPolygon : MonoBehaviour
 {
     public LineRenderer m_LineRenderer;
     public LineRenderer m_FireLineRenderer;
+    public LineRenderer m_LookLineRenderer;
     private PolygonCollider2D m_PolygonCollider2D;
 
     public int m_AngleCount;
@@ -39,6 +40,13 @@ public class DrawPolygon : MonoBehaviour
                 m_FireLineRenderer.SetPosition(i, m_FireLineRenderer.GetPosition(i) * size / 0.3f);
             }
         }
+        if (m_LookLineRenderer != null)
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                m_LookLineRenderer.SetPosition(i, m_LookLineRenderer.GetPosition(i) * size / 0.3f);
+            }
+        }
     }
 
     private void Update()
@@ -61,12 +69,12 @@ public class DrawPolygon : MonoBehaviour
             saveLerp[i] = Vector2.Lerp(saveLerp[i], new Vector3(m_Size * Mathf.Sin(angle * i * Mathf.Deg2Rad), m_Size * Mathf.Cos(angle * i * Mathf.Deg2Rad)), Time.deltaTime * 9f);
             m_LineRenderer.SetPosition(i, saveLerp[i]);
             var myPoints = m_PolygonCollider2D.points;
-            myPoints[i] = new Vector2(size * Mathf.Sin(angle * i * Mathf.Deg2Rad), size * Mathf.Cos(angle * i * Mathf.Deg2Rad)) * (isPlayer ? 0.25f : 1);
+            myPoints[i] = new Vector2(size * Mathf.Sin(angle * i * Mathf.Deg2Rad), size * Mathf.Cos(angle * i * Mathf.Deg2Rad)) * (isPlayer ? 0.5f : 1f);
             m_PolygonCollider2D.points = myPoints;
             lastIndex++;
         }
         var lastPoints = m_PolygonCollider2D.points;
-        lastPoints[lastIndex] = new Vector2(0, m_Size) * (isPlayer ? 0.25f : 1);
+        lastPoints[lastIndex] = new Vector2(0, m_Size) * (isPlayer ? 0.5f : 1f);
         m_PolygonCollider2D.points = lastPoints;
 
         m_Size = Mathf.Lerp(m_Size, size, Time.deltaTime * 50);

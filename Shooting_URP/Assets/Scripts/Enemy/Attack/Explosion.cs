@@ -56,13 +56,12 @@ public class Explosion : MonoBehaviour
 
                 lastIndex++;
             }
-            if (i <= 0.5f)
+            if (i <= 0.4f)
             {
                 var lastPoints = m_PolygonCollider2D.points;
                 lastPoints[lastIndex] = new Vector2(0, m_Size) * 0.95f;
                 m_PolygonCollider2D.points = lastPoints;
             }
-
             m_Size = Mathf.Lerp(m_Size, size * (m_AngleCount + 3), Time.deltaTime * 7);
             if(i > 0.4f)
             {
