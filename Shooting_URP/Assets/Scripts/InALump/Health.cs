@@ -7,7 +7,7 @@ public class Health : MonoBehaviour
     private DrawPolygon m_DrawPolygon;
     private Level m_PlayerLevel;
     [HideInInspector] public FollowUI m_FollowUI;
-    [HideInInspector] public BossUI m_BossUI;
+    [HideInInspector] public BigUI m_BigUI;
     public EnemyExplosion m_EnemyExplosion;
 
     public float defhp;
@@ -23,7 +23,7 @@ public class Health : MonoBehaviour
     {
         m_DrawPolygon = GetComponent<DrawPolygon>();
         m_FollowUI = GetComponentInParent<FollowUI>();
-        m_BossUI = GetComponentInParent<BossUI>();
+        m_BigUI = GetComponentInParent<BigUI>();
         m_PlayerLevel = GameObject.FindGameObjectWithTag("Player").GetComponent<Level>();
         if(!isPlayer) GameManager.instance.Enemys.Add(transform.parent.gameObject);
     }
@@ -67,9 +67,9 @@ public class Health : MonoBehaviour
             m_FollowUI.selectImage.SetActive(false);
             m_FollowUI.selectText.SetActive(false);
         }
-        else if(m_BossUI)
+        else if(m_BigUI)
         {
-            m_BossUI.m_BossBundle.SetActive(false);
+            m_BigUI.m_Bundle.SetActive(false);
         }
 
         if (m_EnemyExplosion) m_EnemyExplosion.Explosion();

@@ -18,7 +18,7 @@ public class EnemyRotatement : MonoBehaviour
 
     private void Start()
     {
-        m_EnemyFire = GetComponent<EnemyFire>();
+        if(!isAttackRound) m_EnemyFire = GetComponent<EnemyFire>();
         m_Player = GameObject.FindGameObjectWithTag("Player").transform;
     }
     private void Update()

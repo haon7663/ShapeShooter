@@ -6,18 +6,14 @@ using UnityEngine;
 public class EnemyFire : MonoBehaviour
 {
     private EnemyRotatement m_Rotatement;
-    private List<GameObject> pools;
-    private Transform m_ProjectileBundle;
 
     [Space]
-    [Header("투사체")]
-    public GameObject m_Projectile;
+    [Header("투사체번호")]
+    public int m_ProjectileCount;
 
     [Space]
     [Header("공격력")]
     public float m_Damage;
-    [Header("관통")]
-    public int m_PenetrateCount;
     [Header("투사체속도")]
     public float m_ProjectileSpeed;
 
@@ -40,14 +36,11 @@ public class EnemyFire : MonoBehaviour
     private void Start()
     {
         m_Rotatement = GetComponent<EnemyRotatement>();
-        m_ProjectileBundle = GameObject.FindGameObjectWithTag("ProjectileBundle").transform;
-
-        pools = new List<GameObject>();
     }
 
     private void Update()
     {
-        m_Rotatement.transform.localPosition = Vector3.zero + m_Rotatement.transform.right * Mathf.Sin(sin) * Mathf.Abs(absolute) / 3;
+        transform.localPosition = Vector3.zero + transform.right * Mathf.Sin(sin) * Mathf.Abs(absolute) / 3;
         sin -= 5 * Time.deltaTime;
         absolute = Mathf.Lerp(absolute, 0, Time.deltaTime * 10);
         if (attackDelay < 0)
@@ -57,7 +50,7 @@ public class EnemyFire : MonoBehaviour
         attackDelay -= Time.deltaTime;
     }
 
-    private IEnumerator Shot(Vector2 pos)
+    private IEnumerator Shot(Vector3 pos)
     {
         isShoting = true;
         attackDelay = m_AttackDelay;
@@ -67,42 +60,12 @@ public class EnemyFire : MonoBehaviour
             absolute += 1;
             for (int j = 0; j < m_MultiCount; j++)
             {
-                Get(pos, Quaternion.Euler(0, 0, transform.localEulerAngles.z + m_SpreadAngle * (j - (m_MultiCount - 1) / 2)));
+                PoolManager.instance.Get(m_ProjectileCount, m_Rotatement.isAttackRound ? pos + transform.position + transform.right : pos + transform.position, Quaternion.Euler(0, 0, transform.localEulerAngles.z + m_SpreadAngle * (j - (m_MultiCount - 1) / 2))
+                                       , m_Damage, m_ProjectileSpeed);
             }
             yield return YieldInstructionCache.WaitForSeconds(m_BurstSpeed);
         }
         isShoting = false;
         yield return null;
-    }
-
-    public void Get(Vector3 pos, Quaternion rot)
-    {
-        GameObject select = null;
-
-        foreach (GameObject item in pools)
-        {
-            if (!item.activeSelf)
-            {
-                select = item;
-                select.SetActive(true);
-                break;
-            }
-        }
-
-        if (!select)
-        {
-            select = Instantiate(m_Projectile);
-            pools.Add(select);
-        }
-
-        var projectile = select.GetComponent<Projectile>();
-
-        projectile.realDamage = m_Damage;
-        projectile.penetrateCount = m_PenetrateCount;
-        projectile.speed = m_ProjectileSpeed;
-        projectile.isPlayer = false;
-
-        select.transform.SetParent(m_ProjectileBundle);
-        select.transform.SetPositionAndRotation(m_Rotatement.isAttackRound ? pos + transform.position + transform.right : pos + transform.position, rot);
     }
 }

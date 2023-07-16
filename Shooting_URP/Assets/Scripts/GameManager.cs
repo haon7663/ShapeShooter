@@ -25,8 +25,11 @@ public class GameManager : MonoBehaviour
     public WaveStruct[] m_WaveStruct = new WaveStruct[1];
 
     public List<GameObject> Enemys;
-
     private Camera m_Camera;
+
+    public int m_DestroyScore;
+    public float m_Minutes;
+    public float m_Seconds;
 
     private void Awake()
     {
@@ -37,6 +40,16 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(Waving());
+    }
+
+    private void Update()
+    {
+        m_Seconds += Time.deltaTime;
+        if((int)m_Seconds >= 60)
+        {
+            m_Seconds = 0;
+            m_Minutes += 1;
+        }
     }
 
 

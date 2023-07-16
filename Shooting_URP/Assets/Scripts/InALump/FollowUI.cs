@@ -22,7 +22,7 @@ public class FollowUI : MonoBehaviour
     [HideInInspector] public GameObject selectText;
     [HideInInspector] public GameObject selectImage;
 
-    Vector3 hpPos = new Vector3(0, 0.5f);
+    public Vector3 hpPos = new Vector3(0, 0.5f);
 
     float hpLerp;
 

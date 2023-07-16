@@ -15,6 +15,8 @@ public class Movement : MonoBehaviour
     public float m_Speed;
     public float m_RotateSpeed;
 
+    [HideInInspector] public float m_HitTime;
+
     float x, y;
 
     private void Start()

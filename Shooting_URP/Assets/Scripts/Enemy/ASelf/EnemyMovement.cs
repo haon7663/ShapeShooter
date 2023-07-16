@@ -6,7 +6,7 @@ using UnityEngine;
 
 public enum MoveType
 {
-    StraightMove, SideMove, Pinned, Follow
+    StraightMove, SideMove, Pinned, Follow, Kinematic
 }
 
 public class EnemyMovement : MonoBehaviour
@@ -27,9 +27,12 @@ public class EnemyMovement : MonoBehaviour
     private float m_PinnedX;
     private float m_PinnedY;
 
+    [HideInInspector] public Transform m_Follow;
+    [HideInInspector] public bool onMove = true;
+
     private Transform m_Player;
     bool onFollow, onPinned;
-    bool isPinned;
+    bool isPinned, isKinetic;
     float x, y;
 
     private void Awake()
@@ -40,12 +43,13 @@ public class EnemyMovement : MonoBehaviour
     }
     private void OnEnable()
     {
+        onMove = true;
         m_EnemySprite = transform.GetChild(0);
         m_PinnedX = -m_Camera.transform.position.x + transform.position.x - 10;
         m_PinnedY = transform.position.y;
 
         x = 0; y = 0;
-        onFollow = false; onPinned = false;
+        onFollow = false; onPinned = false; isKinetic = false;
         switch (m_MoveType.ToString())
         {
             case "StraightMove":
@@ -63,11 +67,21 @@ public class EnemyMovement : MonoBehaviour
             case "Follow":
                 onFollow = true;
                 break;
+
+            case "Kinematic":
+                isKinetic = true;
+                break;
         }
     }
     private void FixedUpdate()
     {
-        if (isPinned)
+        if (!onMove) return;
+        if (isKinetic)
+        {
+            transform.position = Vector3.Lerp(transform.position, m_Follow.position + new Vector3(-6, m_PinnedY), Time.deltaTime * 4f);
+            m_EnemySprite.Rotate(new Vector3(0, 0, 0.6f * m_RotateSpeed));
+        }
+        else if (isPinned)
         {
             transform.position = Vector3.Lerp(transform.position, new Vector3(m_Player.transform.position.x + m_PinnedX, m_PinnedY), Time.deltaTime * 1.2f);
             m_EnemySprite.Rotate(new Vector3(0, 0, 0.6f * m_RotateSpeed));

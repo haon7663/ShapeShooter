@@ -32,7 +32,6 @@ public class DrawPolygon : MonoBehaviour
         size = m_Size;
         ChangeAngle();
 
-        //m_FireLineRenderer = transform.parent.GetChild(1).GetComponent<LineRenderer>();
         if (m_FireLineRenderer != null)
         {
             for (int i = 0; i < 9; i++)
@@ -74,7 +73,7 @@ public class DrawPolygon : MonoBehaviour
             lastIndex++;
         }
         var lastPoints = m_PolygonCollider2D.points;
-        lastPoints[lastIndex] = new Vector2(0, m_Size) * (isPlayer ? 0.5f : 1f);
+        lastPoints[lastIndex] = new Vector2(0, size) * (isPlayer ? 0.5f : 1f);
         m_PolygonCollider2D.points = lastPoints;
 
         m_Size = Mathf.Lerp(m_Size, size, Time.deltaTime * 50);
@@ -84,7 +83,6 @@ public class DrawPolygon : MonoBehaviour
     {
         hitTime = 0.05f;
         if(m_Size < size * 1.2f + 1.8f) m_Size = size * 1.3f + 0.95f;
-        //DOVirtual.Float(size * 1.8f + 0.5f, size, 0.15f, ReSize).SetEase(Ease.OutExpo);
     }
     public void ChangeAngle()
     {
@@ -95,6 +93,5 @@ public class DrawPolygon : MonoBehaviour
         Array.Resize(ref saveLerp, m_AngleCount);
 
         m_Size = size * 5f + 2f;
-        //DOVirtual.Float(size * 2.25f + 1f, size, 0.6f, ReSize).SetEase(Ease.OutExpo);
     }
 }

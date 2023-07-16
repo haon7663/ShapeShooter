@@ -6,14 +6,16 @@ public class Projectile : MonoBehaviour
 {
     private Rigidbody2D m_Rigidbody2D;
     public TrailRenderer m_TrailRenderer;
+    [HideInInspector] public Transform line;
 
     [HideInInspector] public bool isTrail;
-    [HideInInspector] public Transform line;
     [HideInInspector] public bool isPlayer;
     [HideInInspector] public float speed;
-    [HideInInspector] public float rotateSpeed;
     [HideInInspector] public float realDamage;
     [HideInInspector] public int penetrateCount;
+
+    public float rotateSpeed;
+    private Collider2D collisionCalled;
 
     private void Awake()
     {
@@ -22,6 +24,7 @@ public class Projectile : MonoBehaviour
     }
     private void OnEnable()
     {
+        collisionCalled = null;
         if (isTrail)
         {
             m_TrailRenderer.enabled = false;
@@ -37,15 +40,16 @@ public class Projectile : MonoBehaviour
     {
         m_Rigidbody2D.velocity = transform.right * speed * Time.deltaTime;
         line.Rotate(new Vector3(0, 0, (m_Rigidbody2D.velocity.x > 0 ? m_Rigidbody2D.velocity.x : -m_Rigidbody2D.velocity.x) +
-                                           (m_Rigidbody2D.velocity.y > 0 ? m_Rigidbody2D.velocity.y : -m_Rigidbody2D.velocity.y)) * rotateSpeed);
+                                      (m_Rigidbody2D.velocity.y > 0 ? m_Rigidbody2D.velocity.y : -m_Rigidbody2D.velocity.y)) * rotateSpeed);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(isPlayer && collision.CompareTag("Enemy"))
+        if(isPlayer && collision.CompareTag("Enemy") && collisionCalled != collision)
         {
             collision.GetComponent<Health>().OnDamage(realDamage);
             if(penetrateCount > 0)
             {
+                collisionCalled = collision;
                 realDamage *= 0.5f;
                 penetrateCount--;
             }

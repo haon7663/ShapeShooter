@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 7188178170633963435}
   m_Layer: 6
   m_Name: Enemy_weak_Look
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -185,6 +185,8 @@ MonoBehaviour:
     m_Bits: 128
   m_Speed: 95
   m_RotateSpeed: 0.4
+  m_Follow: {fileID: 0}
+  onMove: 1
 --- !u!114 &2450264195915432098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,6 +203,7 @@ MonoBehaviour:
   m_HPImage: {fileID: 3356241220938510681, guid: 908293f7dd11973409381d058a4ad954, type: 3}
   selectText: {fileID: 0}
   selectImage: {fileID: 0}
+  hpPos: {x: 0, y: 0.5, z: 0}
 --- !u!50 &7188178170633963435
 Rigidbody2D:
   serializedVersion: 4
@@ -290,6 +293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_FollowUI: {fileID: 0}
+  m_BigUI: {fileID: 0}
   m_EnemyExplosion: {fileID: 0}
   defhp: 0
   maxhp: 5
@@ -480,9 +484,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e7a40b2e57158645b5aa8b337aeac67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Projectile: {fileID: 2474619297183364068, guid: 77907f6d2de8f0248a0e2b865d0a3f78, type: 3}
+  m_ProjectileCount: 0
   m_Damage: 4
-  m_PenetrateCount: 0
   m_ProjectileSpeed: 500
   m_AttackDelay: 2
   m_BurstCount: 1

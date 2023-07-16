@@ -84,10 +84,11 @@ public class FireProjectile : MonoBehaviour
     private Rotatement[] m_Rotatement = new Rotatement[10];
     public int typeCount;
 
+    private float[] sin = new float[5];
+    private float[] absolute = new float[5];
+
     float attackDelay;
     Vector3[] weaponPos = new Vector3[5];
-    float[] sin = new float[5], absolute = new float[5];
-    bool isShoting;
 
     private void Awake()
     {
@@ -124,13 +125,13 @@ public class FireProjectile : MonoBehaviour
             var detail = m_UpgradeStruct[typeCount].m_DetailUpgrade;
             for(int i = 0; i < detail.Length; i++)
             {
-                if (detail[i].m_DelayCount > upgradeCount[i])
+                if (upgradeCount[i] > 0)
                 {
-                    upgradeCount[i]++;
+                    upgradeCount[i]--;
                 }
                 else
                 {
-                    upgradeCount[i] = 0;
+                    upgradeCount[i] = 100;
                     switch (detail[i].m_UpgradeType.ToString())
                     {
                         case "Damage":
@@ -172,7 +173,10 @@ public class FireProjectile : MonoBehaviour
                 }
             }
             upgradeCount = new int[m_UpgradeStruct[typeCount].m_DetailUpgrade.Length];
-
+            for (int i = 0; i < m_UpgradeStruct[typeCount].m_DetailUpgrade.Length; i++)
+            {
+                upgradeCount[i] = m_UpgradeStruct[typeCount].m_DetailUpgrade[i].m_DelayCount;
+            }
             for (int i = 0; i < m_BulletStruct[typeCount].m_Weapon.Length; i++)
             {
                 m_BulletStruct[typeCount].m_Weapon[i].gameObject.SetActive(true);
@@ -209,7 +213,6 @@ public class FireProjectile : MonoBehaviour
 
     private IEnumerator Shot(int k)
     {
-        isShoting = true;
         attackDelay = m_BulletStruct[typeCount].m_AttackDelay;
         for (int i = 0; i < m_BulletStruct[typeCount].m_BurstCount; i++)
         {
@@ -221,7 +224,6 @@ public class FireProjectile : MonoBehaviour
             }
             yield return YieldInstructionCache.WaitForSeconds(m_BulletStruct[typeCount].m_BurstSpeed);
         }
-        isShoting = false;
         yield return null;
     }
 
