@@ -18,6 +18,7 @@ public class Health : MonoBehaviour
     public GameObject m_DestoryParticle;
 
     public bool isPlayer;
+    public bool isInvisble;
 
     private void Start()
     {
@@ -35,6 +36,7 @@ public class Health : MonoBehaviour
 
     public void OnDamage(float dam)
     {
+        if (isInvisble) return;
         curhp -= dam;
         m_DrawPolygon.OnDamage();
         if (isPlayer) StartCoroutine(CameraEffect.instance.OnDamage());

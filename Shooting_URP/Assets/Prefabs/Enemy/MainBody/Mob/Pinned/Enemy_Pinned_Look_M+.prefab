@@ -47,14 +47,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e7a40b2e57158645b5aa8b337aeac67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ProjectileCount: 1
-  m_Damage: 5
+  m_ProjectileCount: 2
+  m_Damage: 8
   m_ProjectileSpeed: 700
   m_AttackDelay: 2.7
-  m_BurstCount: 5
+  m_BurstCount: 4
   m_BurstSpeed: 0.2
-  m_MultiCount: 3
-  m_SpreadAngle: 8
+  m_MultiCount: 5
+  m_SpreadAngle: 10
   isShoting: 0
 --- !u!114 &1185167153373780480
 MonoBehaviour:
@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_FollowUI: {fileID: 0}
-  m_BossUI: {fileID: 0}
+  m_BigUI: {fileID: 0}
   m_EnemyExplosion: {fileID: 0}
   defhp: 0
   maxhp: 18
@@ -443,6 +443,7 @@ MonoBehaviour:
   m_Speed: 125
   m_RotateSpeed: 0.3
   m_Follow: {fileID: 0}
+  onMove: 1
 --- !u!114 &5886785824296015984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -459,6 +460,7 @@ MonoBehaviour:
   m_HPImage: {fileID: 3356241220938510681, guid: 908293f7dd11973409381d058a4ad954, type: 3}
   selectText: {fileID: 0}
   selectImage: {fileID: 0}
+  hpPos: {x: 0, y: 0.5, z: 0}
 --- !u!50 &1185167154648391545
 Rigidbody2D:
   serializedVersion: 4

@@ -25,6 +25,12 @@ public class GameManager : MonoBehaviour
     public WaveStruct[] m_WaveStruct = new WaveStruct[1];
 
     public List<GameObject> Enemys;
+
+    public GameObject[] m_Items;
+
+    public GameObject m_StageResult;
+    public GameObject m_DeathZone;
+
     private Camera m_Camera;
 
     public int m_DestroyScore;
@@ -52,7 +58,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
     private IEnumerator Waving()
     {
         yield return YieldInstructionCache.WaitForSeconds(1f);
@@ -73,7 +78,18 @@ public class GameManager : MonoBehaviour
         {
             StartCoroutine(Waving());
         }
-    }    
+        else
+        {
+            m_DeathZone.SetActive(false);
+            m_StageResult.SetActive(true);
+        }
+    }
+
+    /*public GameObject ItemPersent(int persent)
+    {
+        if(Random.Range(1, 101) <= persent)
+        return 
+    }*/
 }
 
 internal static class YieldInstructionCache

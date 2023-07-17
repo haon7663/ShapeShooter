@@ -23,7 +23,8 @@ public class StageResult : MonoBehaviour
     }
     public IEnumerator OnResult()
     {
-        for(int i = 0; i < 3; i++)
+        yield return YieldInstructionCache.WaitForSeconds(2f);
+        for (int i = 0; i < 3; i++)
         {
             m_Struct[i].m_NameText.enabled = true;
 
@@ -38,6 +39,7 @@ public class StageResult : MonoBehaviour
         }
         for(int i = 0; i < 3; i++)
         {
+            float setSize = 1;
             size = 1.4f;
             switch (i)
             {
@@ -48,13 +50,16 @@ public class StageResult : MonoBehaviour
                     m_Struct[i].m_ScoreText.text = string.Format("{0:D2}:{1:D2}", (int)GameManager.instance.m_Minutes, (int)GameManager.instance.m_Seconds);
                     break;
                 case 2:
+                    size = 2.5f;
+                    setSize = 1.5f;
                     m_Struct[i].m_ScoreText.text = Mathf.RoundToInt(GameManager.instance.m_DestroyScore * 50000 / (200 + (GameManager.instance.m_Minutes * 60 + GameManager.instance.m_Seconds) / 2.5f)).ToString();
                     break;
             }
+            m_Struct[i].m_ScoreText.enabled = true;
             for (float j = 0; j < 0.7f; j += Time.deltaTime)
             {
                 m_Struct[i].m_ScoreText.transform.localScale = new Vector3(size, size);
-                size = Mathf.Lerp(size, 1, Time.deltaTime * 5);
+                size = Mathf.Lerp(size, setSize, Time.deltaTime * 5);
                 yield return YieldInstructionCache.WaitForFixedUpdate;
             }
         }

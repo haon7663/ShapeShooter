@@ -23,6 +23,7 @@ public class FireProjectile : MonoBehaviour
     public AttackType m_AttackType;
 
     public GameObject m_Projectile;
+    public WeaponPos m_WeaponPos;
 
     [Serializable]
     public struct BulletStruct
@@ -80,15 +81,14 @@ public class FireProjectile : MonoBehaviour
 
     public int m_WeaponLevel = 0;
     private int[] upgradeCount = new int[5];
-
-    private Rotatement[] m_Rotatement = new Rotatement[10];
     public int typeCount;
 
+    private Rotatement[] m_Rotatement = new Rotatement[10];
     private float[] sin = new float[5];
     private float[] absolute = new float[5];
+    private Vector3[] weaponPos = new Vector3[5];
+    private float attackDelay;
 
-    float attackDelay;
-    Vector3[] weaponPos = new Vector3[5];
 
     private void Awake()
     {
@@ -120,7 +120,7 @@ public class FireProjectile : MonoBehaviour
             }
         }
 
-        if(typeint != 0 && typeint == typeCount)
+        if (typeint != 0 && typeint == typeCount)
         {
             var detail = m_UpgradeStruct[typeCount].m_DetailUpgrade;
             for(int i = 0; i < detail.Length; i++)
@@ -165,6 +165,7 @@ public class FireProjectile : MonoBehaviour
             {
                 for (int j = 0; j < m_BulletStruct[i].m_Weapon.Length; j++)
                 {
+                    m_BulletStruct[i] = m_OriginStruct[i];
                     m_BulletStruct[i].m_Weapon[j].gameObject.SetActive(false);
                 }
                 if (m_BulletStruct[i].m_Type == type.ToString())
@@ -184,6 +185,7 @@ public class FireProjectile : MonoBehaviour
                 weaponPos[i] = m_Rotatement[i].transform.localPosition;
             }
         }
+        m_WeaponPos.SetWeapon(m_WeaponLevel, typeint);
     }
 
     private void Update()

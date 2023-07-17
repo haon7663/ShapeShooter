@@ -71,6 +71,7 @@ MonoBehaviour:
   m_HPImage: {fileID: 3356241220938510681, guid: 908293f7dd11973409381d058a4ad954, type: 3}
   selectText: {fileID: 0}
   selectImage: {fileID: 0}
+  hpPos: {x: 0, y: 0.5, z: 0}
 --- !u!50 &2149593716634496485
 Rigidbody2D:
   serializedVersion: 4
@@ -142,7 +143,7 @@ MonoBehaviour:
   m_LineRenderer: {fileID: 0}
   m_FireLineRenderer: {fileID: 0}
   m_LookLineRenderer: {fileID: 0}
-  m_AngleCount: 8
+  m_AngleCount: 7
   m_Size: 1
   hitTime: 0
   isPlayer: 0
@@ -160,11 +161,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_FollowUI: {fileID: 0}
-  m_BossUI: {fileID: 0}
+  m_BigUI: {fileID: 0}
   m_EnemyExplosion: {fileID: 0}
   defhp: 0
-  maxhp: 26
-  curhp: 26
+  maxhp: 20
+  curhp: 20
   exp: 10
   m_DestoryParticle: {fileID: 7972528174872875722, guid: 9ac742c501e4d504d88302923e006f2d, type: 3}
   isPlayer: 0

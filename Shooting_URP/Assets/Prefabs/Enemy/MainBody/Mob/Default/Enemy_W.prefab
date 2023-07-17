@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ProjectileCount: 0
   m_Damage: 5
-  m_ProjectileSpeed: 400
+  m_ProjectileSpeed: 600
   m_AttackDelay: 3
   m_BurstCount: 1
   m_BurstSpeed: 0

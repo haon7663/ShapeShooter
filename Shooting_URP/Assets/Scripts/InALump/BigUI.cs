@@ -21,7 +21,10 @@ public class BigUI : MonoBehaviour
 
     private void Awake()
     {
-        if (!isPlayer) m_Bundle = GameObject.Find("BossBundle");
+        if (!isPlayer)
+        {
+            m_Bundle = GameObject.Find("HPBundle").transform.GetChild(1).gameObject;
+        }
         m_DrawPolygon = GetComponentInChildren<DrawPolygon>();
         m_Health = GetComponentInChildren<Health>();
 
@@ -33,7 +36,10 @@ public class BigUI : MonoBehaviour
     private void OnEnable()
     {
         m_Bundle.SetActive(true);
-        if(!isPlayer) m_NameText.text = m_BossName;
+        if (!isPlayer)
+        {
+            m_NameText.text = m_BossName;
+        }
     }
 
     private void LateUpdate()

@@ -32,4 +32,11 @@ public class Weapon_Item : Item
         m_FirePorjectile.SetWeapon(m_AttackType);
         Destroy(gameObject);
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Death"))
+        {
+            Destroy(gameObject);
+        }
+    }
 }

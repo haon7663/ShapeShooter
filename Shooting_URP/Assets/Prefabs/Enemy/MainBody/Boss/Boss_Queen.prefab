@@ -71,9 +71,9 @@ MonoBehaviour:
   m_BigUI: {fileID: 0}
   m_EnemyExplosion: {fileID: 0}
   defhp: 0
-  maxhp: 200
-  curhp: 200
-  exp: 25
+  maxhp: 300
+  curhp: 300
+  exp: 100
   m_DestoryParticle: {fileID: 7972528174872875722, guid: 9ac742c501e4d504d88302923e006f2d, type: 3}
   isPlayer: 0
 --- !u!120 &2984456479754105730
@@ -353,22 +353,22 @@ MonoBehaviour:
   m_SkillStruct:
   - m_Name: TripleSpread
     m_Object: {fileID: 0}
-    m_Delay: 12
-    m_StartDelay: 12
+    m_Delay: 7
+    m_StartDelay: 9
     delay: 0
   - m_Name: OctaSpread
     m_Object: {fileID: 0}
-    m_Delay: 55
-    m_StartDelay: 55
+    m_Delay: 40
+    m_StartDelay: 40
     delay: 0
   - m_Name: TightSpread
     m_Object: {fileID: 0}
-    m_Delay: 30
+    m_Delay: 20
     m_StartDelay: 29.1
     delay: 0
   - m_Name: LineShot
     m_Object: {fileID: 0}
-    m_Delay: 46
+    m_Delay: 25
     m_StartDelay: 25
     delay: 0
   - m_Name: SummonProtecter
@@ -378,18 +378,18 @@ MonoBehaviour:
     delay: 0
   - m_Name: SummonPinned
     m_Object: {fileID: 220029532660080928, guid: d4b830399d35d074b97c627d56cfd45a, type: 3}
-    m_Delay: 45
-    m_StartDelay: 30
+    m_Delay: 50
+    m_StartDelay: 10
     delay: 0
   - m_Name: SummonDefault
     m_Object: {fileID: 5758118427218723418, guid: c67c4baef8649274d94ca65fcf77175d, type: 3}
-    m_Delay: 20
-    m_StartDelay: 0
+    m_Delay: 50
+    m_StartDelay: 10
     delay: 0
   - m_Name: SummonWeak
     m_Object: {fileID: 7188178170633963433, guid: d5c0cf89e46be8b4d8f955aa21219fef, type: 3}
-    m_Delay: 6
-    m_StartDelay: 3
+    m_Delay: 25
+    m_StartDelay: 12
     delay: 0
   isShoting: 0
 --- !u!114 &8714623293790002120

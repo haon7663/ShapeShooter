@@ -75,9 +75,9 @@ public class Queen_Patten : MonoBehaviour
         {
             for (int j = 0; j < 24; j++)
             {
-                PoolManager.instance.Get(2, transform.position, Quaternion.Euler(0, 0, zRandom + 15 * (j - (12 - 1) / 2) + (i * 7.5f)), 8, 1500);
+                PoolManager.instance.Get(2, transform.position, Quaternion.Euler(0, 0, zRandom + 15 * (j - (12 - 1) / 2) + (i * 7.5f)), 8, 1250 - i * 300);
             }
-            yield return YieldInstructionCache.WaitForSeconds(0.3f);
+            yield return YieldInstructionCache.WaitForSeconds(0.5f);
         }
         yield return YieldInstructionCache.WaitForSeconds(0.6f);
         isShoting = false;
@@ -86,11 +86,14 @@ public class Queen_Patten : MonoBehaviour
     }
     private IEnumerator TightSpread(int value)
     {
+        isShoting = true;
+        yield return YieldInstructionCache.WaitForSeconds(2f);
         float zRandom = Random.Range(-15, 15);
-        for (int j = 0; j < 48; j++)
+        for (int j = 0; j < 36; j++)
         {
-            PoolManager.instance.Get(1, transform.position, Quaternion.Euler(0, 0, zRandom + 7.5f * (j - (12 - 1) / 2)), 8, 400);
+            PoolManager.instance.Get(1, transform.position, Quaternion.Euler(0, 0, zRandom + 10f * j), 8, 400);
         }
+        isShoting = false;
         yield return null;
     }
     private IEnumerator LineShot(int value)
@@ -99,9 +102,9 @@ public class Queen_Patten : MonoBehaviour
         for (int i = 0; i < 18; i++)
         {
             float zValue = 72 - i * 8;
-            PoolManager.instance.Get(3, transform.position, Quaternion.Euler(0, 0, transform.localEulerAngles.z + zValue), 5, 800);
-            PoolManager.instance.Get(3, transform.position, Quaternion.Euler(0, 0, transform.localEulerAngles.z + -zValue), 5, 800);
-            yield return YieldInstructionCache.WaitForSeconds(0.075f);
+            PoolManager.instance.Get(3, transform.position, Quaternion.Euler(0, 0, transform.localEulerAngles.z + zValue), 5, 500);
+            PoolManager.instance.Get(3, transform.position, Quaternion.Euler(0, 0, transform.localEulerAngles.z + -zValue), 5, 500);
+            yield return YieldInstructionCache.WaitForSeconds(0.09f);
         }
         yield return YieldInstructionCache.WaitForSeconds(1f);
         isShoting = false;
@@ -137,7 +140,10 @@ public class Queen_Patten : MonoBehaviour
     }
     private IEnumerator SummonWeak(int value)
     {
-        Instantiate(m_SkillStruct[value].m_Object, transform.position + new Vector3(10, Random.Range(7, -7)), Quaternion.identity);
+        Instantiate(m_SkillStruct[value].m_Object, transform.position + new Vector3(10, 7), Quaternion.identity);
+        Instantiate(m_SkillStruct[value].m_Object, transform.position + new Vector3(10, -7), Quaternion.identity);
+        Instantiate(m_SkillStruct[value].m_Object, transform.position + new Vector3(12, -4), Quaternion.identity);
+        Instantiate(m_SkillStruct[value].m_Object, transform.position + new Vector3(12, 4), Quaternion.identity);
         yield return null;
     }
 }

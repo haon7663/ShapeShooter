@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 80133b78c26eb9447850403400259deb
+guid: ec5a4fa2d38c91547ac09175bdd16214
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,51 +113,21 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: "\uC81C\uBAA9 \uC5C6\uB294 \uB2E4\uC774\uC5B4\uADF8\uB7A8.drawio (37)_0"
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 51
-        height: 502
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4c17d15d5ef7d964891f3d812f59634e
-      internalID: 1756791923
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "\uC81C\uBAA9 \uC5C6\uB294 \uB2E4\uC774\uC5B4\uADF8\uB7A8.drawio (37)_1"
-      rect:
-        serializedVersion: 2
-        x: 69
-        y: 0
-        width: 52
-        height: 502
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 10, z: 0, w: 11}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fd736cb026886804c97e9c3d729945d7
-      internalID: -1705908022
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -168,9 +138,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      "\uC81C\uBAA9 \uC5C6\uB294 \uB2E4\uC774\uC5B4\uADF8\uB7A8.drawio (37)_0": 1756791923
-      "\uC81C\uBAA9 \uC5C6\uB294 \uB2E4\uC774\uC5B4\uADF8\uB7A8.drawio (37)_1": -1705908022
+    nameFileIdTable: {}
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
