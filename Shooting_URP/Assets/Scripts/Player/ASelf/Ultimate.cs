@@ -13,7 +13,7 @@ public class Ultimate : MonoBehaviour
 
     public float m_InvisbleTime;
 
-    public float ultimateTime;
+    public float m_UltimateTime;
 
     private void Start()
     {
@@ -22,11 +22,11 @@ public class Ultimate : MonoBehaviour
     }
     private void Update()
     {
-        m_UltimateImage.fillAmount = ultimateTime / 90;
-        if(ultimateTime < 90) ultimateTime += Time.deltaTime;
+        m_UltimateImage.fillAmount = m_UltimateTime / 90;
+        if(m_UltimateTime < 90) m_UltimateTime += Time.deltaTime;
         else if (Input.GetKeyDown(KeyCode.Space))
         {
-            ultimateTime = 0;
+            m_UltimateTime = 0;
             StartCoroutine(UseUltimate());
         }
         m_Health.isInvisble = m_InvisbleTime > 0;

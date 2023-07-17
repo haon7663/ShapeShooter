@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 220029532660080930}
   m_Layer: 6
   m_Name: Enemy_Pinned
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ProjectileCount: 0
-  m_Damage: 5
+  m_Damage: 50
   m_ProjectileSpeed: 450
   m_AttackDelay: 2
   m_BurstCount: 1
@@ -340,11 +340,13 @@ MonoBehaviour:
   m_BigUI: {fileID: 0}
   m_EnemyExplosion: {fileID: 0}
   defhp: 0
-  maxhp: 9
-  curhp: 9
+  maxhp: 90
+  curhp: 90
   exp: 10
+  itemPer: 10
   m_DestoryParticle: {fileID: 7972528174872875722, guid: 9ac742c501e4d504d88302923e006f2d, type: 3}
   isPlayer: 0
+  isInvisble: 0
 --- !u!120 &220029533755202019
 LineRenderer:
   m_ObjectHideFlags: 0

@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ProjectileCount: 2
-  m_Damage: 8
+  m_Damage: 80
   m_ProjectileSpeed: 700
   m_AttackDelay: 2.7
   m_BurstCount: 4
@@ -247,11 +247,13 @@ MonoBehaviour:
   m_BigUI: {fileID: 0}
   m_EnemyExplosion: {fileID: 0}
   defhp: 0
-  maxhp: 18
-  curhp: 18
+  maxhp: 180
+  curhp: 180
   exp: 15
+  itemPer: 10
   m_DestoryParticle: {fileID: 7972528174872875722, guid: 9ac742c501e4d504d88302923e006f2d, type: 3}
   isPlayer: 0
+  isInvisble: 0
 --- !u!120 &1185167153596819384
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -402,7 +404,7 @@ GameObject:
   - component: {fileID: 1185167154648391545}
   m_Layer: 6
   m_Name: Enemy_Pinned_Look_M+
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

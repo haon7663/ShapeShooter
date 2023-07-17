@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2804355448910345016}
   m_Layer: 6
   m_Name: Enemy_Explosion
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,6 +53,8 @@ MonoBehaviour:
     m_Bits: 128
   m_Speed: 155
   m_RotateSpeed: 1
+  m_Follow: {fileID: 0}
+  onMove: 1
 --- !u!114 &7434191567776412721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,6 +71,7 @@ MonoBehaviour:
   m_HPImage: {fileID: 3356241220938510681, guid: 908293f7dd11973409381d058a4ad954, type: 3}
   selectText: {fileID: 0}
   selectImage: {fileID: 0}
+  hpPos: {x: 0, y: 0.5, z: 0}
 --- !u!50 &2804355448910345016
 Rigidbody2D:
   serializedVersion: 4
@@ -159,13 +162,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_FollowUI: {fileID: 0}
+  m_BigUI: {fileID: 0}
   m_EnemyExplosion: {fileID: 2804355450011978751}
   defhp: 0
-  maxhp: 15
-  curhp: 15
+  maxhp: 175
+  curhp: 175
   exp: 10
+  itemPer: 15
   m_DestoryParticle: {fileID: 7481689618429517493, guid: 3692069cbd405f0409bf14ec4f3750a0, type: 3}
   isPlayer: 0
+  isInvisble: 0
 --- !u!114 &2804355450011978751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,7 +187,7 @@ MonoBehaviour:
   m_Explosion: {fileID: 4773971169979755677, guid: ee9d1ee4d49136f478dde8a7ac59f39a, type: 3}
   m_ExplosionParticle: {fileID: 7481689618429517493, guid: 3692069cbd405f0409bf14ec4f3750a0, type: 3}
   m_ExpRange: 1
-  m_Damage: 0
+  m_Damage: 150
 --- !u!120 &2804355450011978745
 LineRenderer:
   m_ObjectHideFlags: 0

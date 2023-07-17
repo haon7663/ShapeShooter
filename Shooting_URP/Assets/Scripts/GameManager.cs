@@ -2,13 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    public int m_StageCount;
+
     public int m_WaveCount;
+
     [Serializable]
     public struct DetailEnemyStruct
     {
@@ -22,7 +26,13 @@ public class GameManager : MonoBehaviour
     {
         public DetailEnemyStruct[] m_DetailEnemy;
     }
-    public WaveStruct[] m_WaveStruct = new WaveStruct[1];
+
+    [Serializable]
+    public struct StageStruct
+    {
+        public WaveStruct[] m_Wave;
+    }
+    public StageStruct[] m_StageStruct = new StageStruct[1];
 
     public List<GameObject> Enemys;
 
@@ -30,12 +40,16 @@ public class GameManager : MonoBehaviour
 
     public GameObject m_StageResult;
     public GameObject m_DeathZone;
+    public Text m_ScoreText;
+    public Text m_TimeText;
 
     private Camera m_Camera;
 
     public int m_DestroyScore;
     public float m_Minutes;
     public float m_Seconds;
+
+    int stage;
 
     private void Awake()
     {
@@ -46,6 +60,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(Waving());
+        stage = GameManager.instance.m_StageCount;
     }
 
     private void Update()
@@ -56,15 +71,17 @@ public class GameManager : MonoBehaviour
             m_Seconds = 0;
             m_Minutes += 1;
         }
+        m_ScoreText.text = "SCORE: " + m_DestroyScore.ToString();
+        m_TimeText.text = "TIME: " + string.Format("{0:D2}:{1:D2}", (int)m_Minutes, (int)m_Seconds);
     }
 
     private IEnumerator Waving()
     {
         yield return YieldInstructionCache.WaitForSeconds(1f);
         int EnemyCount = 0;
-        for(float i = 0; i < m_WaveStruct[m_WaveCount].m_DetailEnemy[m_WaveStruct[m_WaveCount].m_DetailEnemy.Length-1].m_DelayTime + 0.5f; i += Time.deltaTime)
+        for(float i = 0; i < m_StageStruct[stage].m_Wave[m_WaveCount].m_DetailEnemy[m_StageStruct[stage].m_Wave[m_WaveCount].m_DetailEnemy.Length-1].m_DelayTime + 0.5f; i += Time.deltaTime)
         {
-            var detail = m_WaveStruct[m_WaveCount].m_DetailEnemy;
+            var detail = m_StageStruct[stage].m_Wave[m_WaveCount].m_DetailEnemy;
             if (detail.Length > EnemyCount && !detail[EnemyCount].isCalled && i > detail[EnemyCount].m_DelayTime)
             {
                 detail[EnemyCount].isCalled = true;
@@ -74,22 +91,22 @@ public class GameManager : MonoBehaviour
             yield return YieldInstructionCache.WaitForFixedUpdate;
         }
         while(Enemys.Count > 0) yield return YieldInstructionCache.WaitForFixedUpdate;
-        if(++m_WaveCount < m_WaveStruct.Length)
+        if(++m_WaveCount < m_StageStruct[stage].m_Wave.Length)
         {
             StartCoroutine(Waving());
         }
-        else
-        {
-            m_DeathZone.SetActive(false);
-            m_StageResult.SetActive(true);
-        }
     }
 
-    /*public GameObject ItemPersent(int persent)
+    public GameObject ItemPersent(int persent)
     {
-        if(Random.Range(1, 101) <= persent)
-        return 
-    }*/
+        GameObject select = null;
+        int ran = Random.Range(1, 101);
+        if (ran <= persent)
+        {
+            select = m_Items[Random.Range(0, m_Items.Length)];
+        }
+        return select;
+    }
 }
 
 internal static class YieldInstructionCache

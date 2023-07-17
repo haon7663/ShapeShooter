@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2149593716634496485}
   m_Layer: 6
   m_Name: Enemy_Protecter_Boss
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -164,11 +164,13 @@ MonoBehaviour:
   m_BigUI: {fileID: 0}
   m_EnemyExplosion: {fileID: 0}
   defhp: 0
-  maxhp: 20
-  curhp: 20
+  maxhp: 210
+  curhp: 210
   exp: 10
+  itemPer: 10
   m_DestoryParticle: {fileID: 7972528174872875722, guid: 9ac742c501e4d504d88302923e006f2d, type: 3}
   isPlayer: 0
+  isInvisble: 0
 --- !u!120 &2149593717696582948
 LineRenderer:
   m_ObjectHideFlags: 0

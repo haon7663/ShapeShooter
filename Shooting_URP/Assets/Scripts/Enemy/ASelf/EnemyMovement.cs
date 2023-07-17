@@ -32,7 +32,7 @@ public class EnemyMovement : MonoBehaviour
 
     private Transform m_Player;
     bool onFollow, onPinned;
-    bool isPinned, isKinetic;
+    bool isPinned, isKinetic, isSideMove;
     float x, y;
 
     private void Awake()
@@ -57,6 +57,9 @@ public class EnemyMovement : MonoBehaviour
                 break;
 
             case "SideMove":
+                isSideMove = true;
+                x = -1;
+                y = transform.position.y < 0 ? -4 : 4;
                 break;
 
             case "Pinned":
@@ -76,6 +79,7 @@ public class EnemyMovement : MonoBehaviour
     private void FixedUpdate()
     {
         if (!onMove) return;
+
         if (isKinetic)
         {
             transform.position = Vector3.Lerp(transform.position, m_Follow.position + new Vector3(-6, m_PinnedY), Time.deltaTime * 4f);
@@ -99,6 +103,15 @@ public class EnemyMovement : MonoBehaviour
             {
                 x = 0;
                 isPinned = true;
+            }
+            else if (isSideMove)
+            {
+                var wallhit = Physics2D.OverlapCircle(transform.position + new Vector3(0, y*0.25f), 0.3f, m_WallLayer);
+                if (wallhit)
+                {
+                    y *= -1;
+                    transform.position += new Vector3(0, y * 0.05f);
+                }
             }
         }
 

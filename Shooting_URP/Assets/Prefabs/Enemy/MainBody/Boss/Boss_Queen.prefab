@@ -71,11 +71,13 @@ MonoBehaviour:
   m_BigUI: {fileID: 0}
   m_EnemyExplosion: {fileID: 0}
   defhp: 0
-  maxhp: 300
-  curhp: 300
+  maxhp: 2500
+  curhp: 2500
   exp: 100
+  itemPer: 15
   m_DestoryParticle: {fileID: 7972528174872875722, guid: 9ac742c501e4d504d88302923e006f2d, type: 3}
   isPlayer: 0
+  isInvisble: 0
 --- !u!120 &2984456479754105730
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -226,7 +228,7 @@ GameObject:
   - component: {fileID: 2984456480813828931}
   m_Layer: 6
   m_Name: Boss_Queen
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -390,6 +392,11 @@ MonoBehaviour:
     m_Object: {fileID: 7188178170633963433, guid: d5c0cf89e46be8b4d8f955aa21219fef, type: 3}
     m_Delay: 25
     m_StartDelay: 12
+    delay: 0
+  - m_Name: SummonItem
+    m_Object: {fileID: 7188178170633963433, guid: d5c0cf89e46be8b4d8f955aa21219fef, type: 3}
+    m_Delay: 25
+    m_StartDelay: 40
     delay: 0
   isShoting: 0
 --- !u!114 &8714623293790002120

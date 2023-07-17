@@ -49,4 +49,10 @@ public class BigUI : MonoBehaviour
 
         m_HPImage.fillAmount = hpLerp;
     }
+
+    private void OnDestroy()
+    {
+        GameManager.instance.m_DeathZone.SetActive(false);
+        GameManager.instance.m_StageResult.SetActive(true);
+    }
 }

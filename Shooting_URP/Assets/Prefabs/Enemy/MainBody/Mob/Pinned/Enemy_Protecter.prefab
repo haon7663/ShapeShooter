@@ -68,13 +68,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_FollowUI: {fileID: 0}
+  m_BigUI: {fileID: 0}
   m_EnemyExplosion: {fileID: 0}
   defhp: 0
-  maxhp: 22
-  curhp: 22
+  maxhp: 235
+  curhp: 235
   exp: 10
+  itemPer: 10
   m_DestoryParticle: {fileID: 7972528174872875722, guid: 9ac742c501e4d504d88302923e006f2d, type: 3}
   isPlayer: 0
+  isInvisble: 0
 --- !u!120 &7433303090974636350
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -225,7 +228,7 @@ GameObject:
   - component: {fileID: 7433303092034355711}
   m_Layer: 6
   m_Name: Enemy_Protecter
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -264,6 +267,8 @@ MonoBehaviour:
     m_Bits: 128
   m_Speed: 200
   m_RotateSpeed: 0.4
+  m_Follow: {fileID: 0}
+  onMove: 1
 --- !u!114 &2803766181024646902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,6 +285,7 @@ MonoBehaviour:
   m_HPImage: {fileID: 3356241220938510681, guid: 908293f7dd11973409381d058a4ad954, type: 3}
   selectText: {fileID: 0}
   selectImage: {fileID: 0}
+  hpPos: {x: 0, y: 0.5, z: 0}
 --- !u!50 &7433303092034355711
 Rigidbody2D:
   serializedVersion: 4
