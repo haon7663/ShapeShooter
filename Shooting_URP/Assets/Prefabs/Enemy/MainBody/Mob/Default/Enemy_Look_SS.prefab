@@ -263,7 +263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ProjectileCount: 0
   m_Damage: 40
-  m_ProjectileSpeed: 400
+  m_ProjectileSpeed: 650
   m_AttackDelay: 2
   m_BurstCount: 3
   m_BurstSpeed: 0.2
@@ -442,7 +442,7 @@ MonoBehaviour:
   m_WallLayer:
     serializedVersion: 2
     m_Bits: 128
-  m_Speed: 90
+  m_Speed: 270
   m_RotateSpeed: 0.4
   m_Follow: {fileID: 0}
   onMove: 1

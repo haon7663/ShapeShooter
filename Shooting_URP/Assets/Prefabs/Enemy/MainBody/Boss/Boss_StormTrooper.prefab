@@ -196,13 +196,34 @@ MonoBehaviour:
   - m_Name: RotateSaw
     m_Object: {fileID: 0}
     m_Delay: 50
-    m_StartDelay: 6
+    m_StartDelay: 3
+    delay: 0
+  - m_Name: SummonFollowExplosion
+    m_Object: {fileID: 2804355448910345018, guid: 3d8902134f3fd1b4a84e6e4839a7e128, type: 3}
+    m_Delay: 55
+    m_StartDelay: 40
     delay: 0
   - m_Name: SummonExplosion
     m_Object: {fileID: 4037466393771420457, guid: d26c087435300e54892a8947c47cbc13, type: 3}
     m_Delay: 25
     m_StartDelay: 9
     delay: 0
+  - m_Name: RushToPlayer
+    m_Object: {fileID: 0}
+    m_Delay: 15
+    m_StartDelay: 30
+    delay: 0
+  - m_Name: RushAndRotate
+    m_Object: {fileID: 0}
+    m_Delay: 35
+    m_StartDelay: 16
+    delay: 0
+  - m_Name: SummonItem
+    m_Object: {fileID: 576120725385853552, guid: 658e1f1b51104b04db987327757bc8b1, type: 3}
+    m_Delay: 30
+    m_StartDelay: 2.5
+    delay: 0
+  m_BossPath: {fileID: 3626316512284033101, guid: ef90966074e8a9640822b57ea995ef63, type: 3}
   isShoting: 0
 --- !u!114 &1404072854170000231
 MonoBehaviour:
@@ -271,10 +292,17 @@ MonoBehaviour:
   m_WallLayer:
     serializedVersion: 2
     m_Bits: 128
-  m_Speed: 125
+  m_Speed: 400
   m_RotateSpeed: 0.5
   m_Follow: {fileID: 0}
-  onMove: 1
+  m_PinnedPos: {x: 0, y: 0, z: 0}
+  m_FirstPinnedPos: {x: 0, y: 0, z: 0}
+  m_KineticPos: {x: 0, y: 0, z: 0}
+  onFollow: 0
+  onPinned: 0
+  isPinned: 0
+  isKinetic: 0
+  isSideMove: 0
 --- !u!114 &4820575908461382634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,7 +316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Bundle: {fileID: 0}
-  m_BossName: stormtrooper
+  m_BossName: storm trooper
   isPlayer: 0
 --- !u!50 &4820575908461382636
 Rigidbody2D:

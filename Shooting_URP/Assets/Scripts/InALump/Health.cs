@@ -63,7 +63,6 @@ public class Health : MonoBehaviour
 
     public void Death(bool onExp)
     {
-        GameManager.instance.Enemys.Remove(transform.parent.gameObject);
         
         if(m_FollowUI)
         {
@@ -75,16 +74,18 @@ public class Health : MonoBehaviour
             m_BigUI.m_Bundle.SetActive(false);
         }
 
+        if (!isPlayer && onExp && transform.parent.gameObject.activeSelf)
+        {
+            GameObject select = GameManager.instance.ItemPersent(itemPer);
+            GameManager.instance.m_DestroyScore += (int)exp;
+            if (select) Instantiate(select, transform.position, Quaternion.identity);
+            m_PlayerLevel.AddExp(exp);
+        }
+
         if (m_EnemyExplosion) m_EnemyExplosion.Explosion();
         else
         {
-            if (!isPlayer && onExp && transform.parent.gameObject.activeSelf)
-            {
-                GameObject select = GameManager.instance.ItemPersent(itemPer);
-                GameManager.instance.m_DestroyScore += (int)exp;
-                if (select) Instantiate(select, transform.position, Quaternion.identity);
-                m_PlayerLevel.AddExp(exp);
-            }
+            GameManager.instance.Enemys.Remove(transform.parent.gameObject);
             Instantiate(m_DestoryParticle, transform.position, Quaternion.identity);
             transform.parent.gameObject.SetActive(false);
         }

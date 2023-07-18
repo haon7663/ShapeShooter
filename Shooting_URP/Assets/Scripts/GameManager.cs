@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator Waving()
     {
-        yield return YieldInstructionCache.WaitForSeconds(1f);
+        yield return YieldInstructionCache.WaitForSeconds(4f);
         int EnemyCount = 0;
         for(float i = 0; i < m_StageStruct[stage].m_Wave[m_WaveCount].m_DetailEnemy[m_StageStruct[stage].m_Wave[m_WaveCount].m_DetailEnemy.Length-1].m_DelayTime + 0.5f; i += Time.deltaTime)
         {

@@ -52,10 +52,12 @@ MonoBehaviour:
   m_WallLayer:
     serializedVersion: 2
     m_Bits: 128
-  m_Speed: 300
+  m_Speed: 500
   m_RotateSpeed: 0.4
   m_Follow: {fileID: 0}
-  onMove: 1
+  m_PinnedPos: {x: 0, y: 0, z: 0}
+  m_FirstPinnedPos: {x: 0, y: 0, z: 0}
+  m_KineticPos: {x: 0, y: 0, z: 0}
 --- !u!114 &6621484013437637835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,12 +144,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ProjectileCount: 0
   m_Damage: 50
-  m_ProjectileSpeed: 500
+  m_ProjectileSpeed: 1000
   m_AttackDelay: 3
   m_BurstCount: 1
   m_BurstSpeed: 0
-  m_MultiCount: 3
-  m_SpreadAngle: 12
+  m_MultiCount: 1
+  m_SpreadAngle: 0
   isShoting: 0
 --- !u!114 &1883809882240898747
 MonoBehaviour:

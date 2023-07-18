@@ -40,13 +40,13 @@ public class EnemyExplosion : MonoBehaviour
         if(!isCalled)
         {
             isCalled = true;
+            GameManager.instance.Enemys.Remove(transform.parent.gameObject);
             Explosion ex = Instantiate(m_Explosion, transform.position, Quaternion.identity).GetComponent<Explosion>();
             ex.transform.rotation = transform.rotation;
             ex.m_Size = m_DrawPolygon.size;
             ex.damage = m_Damage;
             ex.m_AngleCount = m_DrawPolygon.m_AngleCount < 3 ? 3 : m_DrawPolygon.m_AngleCount;
             Instantiate(m_ExplosionParticle, transform.position, Quaternion.identity);
-
             m_Health.m_FollowUI.selectImage.SetActive(false);
             m_Health.m_FollowUI.selectText.SetActive(false);
             transform.parent.gameObject.SetActive(false);

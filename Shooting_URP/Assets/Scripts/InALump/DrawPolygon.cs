@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(LineRenderer), typeof(PolygonCollider2D), typeof(DrawPolygon))]
+[RequireComponent(typeof(LineRenderer), typeof(PolygonCollider2D))]
 public class DrawPolygon : MonoBehaviour
 {
     public LineRenderer m_LineRenderer;

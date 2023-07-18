@@ -46,43 +46,28 @@ public class Projectile : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!isNotDestroy)
+        if (isPlayer && collision.CompareTag("Enemy") && collisionCalled != collision)
         {
-            if (isPlayer && collision.CompareTag("Enemy") && collisionCalled != collision)
+            collision.GetComponent<Health>().OnDamage(realDamage);
+            if (penetrateCount > 0)
             {
-                collision.GetComponent<Health>().OnDamage(realDamage);
-                if (penetrateCount > 0)
-                {
-                    collisionCalled = collision;
-                    realDamage *= 0.5f;
-                    penetrateCount--;
-                }
-                else
-                {
-                    ActiveDown();
-                }
+                collisionCalled = collision;
+                realDamage *= 0.5f;
+                penetrateCount--;
             }
-            else if (!isPlayer && collision.CompareTag("Player"))
-            {
-                collision.GetComponent<Health>().OnDamage(realDamage);
-                ActiveDown();
-            }
-            else if (collision.CompareTag("DestroyProjectile") || collision.CompareTag("Death") || (collision.CompareTag("Ultimate") && !isPlayer))
+            else
             {
                 ActiveDown();
             }
         }
-        else if(isNotDestroy)
+        else if (!isPlayer && collision.CompareTag("Player"))
         {
-            if (!isPlayer && collision.CompareTag("Player"))
-            {
-                collision.GetComponent<Health>().OnDamage(realDamage);
-                ActiveDown();
-            }
-            else if (collision.CompareTag("DestroyProjectile")|| (collision.CompareTag("Ultimate") && !isPlayer))
-            {
-                ActiveDown();
-            }
+            collision.GetComponent<Health>().OnDamage(realDamage);
+            ActiveDown();
+        }
+        else if (collision.CompareTag("DestroyProjectile") || collision.CompareTag("Death") || (collision.CompareTag("Ultimate") && !isPlayer))
+        {
+            ActiveDown();
         }
     }
     private void ActiveDown()

@@ -21,7 +21,7 @@ public class Collison : MonoBehaviour
     {
         if (collision.transform.CompareTag("Enemy"))
         {
-            m_Health.OnDamage(5);
+            m_Health.OnDamage(20);
         }
     }
 }

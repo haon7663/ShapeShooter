@@ -6,6 +6,7 @@ public class Weapon_Item : Item
 {
     private FireProjectile m_FirePorjectile;
     private SpriteRenderer m_SpriteRenderer;
+    private Rigidbody2D m_Rigidbody2D;
     public Sprite[] m_Sprite;
 
     public AttackType m_AttackType;
@@ -26,6 +27,9 @@ public class Weapon_Item : Item
             type = 3;
 
         m_SpriteRenderer.sprite = m_Sprite[type];
+
+        m_Rigidbody2D = GetComponent<Rigidbody2D>();
+        m_Rigidbody2D.AddForce(Vector2.left * 150);
     }
     public override void GetItem()
     {

@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ProjectileCount: 0
   m_Damage: 40
-  m_ProjectileSpeed: 400
+  m_ProjectileSpeed: 650
   m_AttackDelay: 4
   m_BurstCount: 2
   m_BurstSpeed: 0.2
@@ -226,7 +226,7 @@ MonoBehaviour:
   m_LineRenderer: {fileID: 0}
   m_FireLineRenderer: {fileID: 2191839716361238299}
   m_LookLineRenderer: {fileID: 312761980837556036}
-  m_AngleCount: 3
+  m_AngleCount: 4
   m_Size: 0.45
   hitTime: 0
   isPlayer: 0
@@ -442,10 +442,12 @@ MonoBehaviour:
   m_WallLayer:
     serializedVersion: 2
     m_Bits: 128
-  m_Speed: 95
+  m_Speed: 285
   m_RotateSpeed: 0.4
   m_Follow: {fileID: 0}
-  onMove: 1
+  m_PinnedPos: {x: 0, y: 0, z: 0}
+  m_FirstPinnedPos: {x: 0, y: 0, z: 0}
+  m_KineticPos: {x: 0, y: 0, z: 0}
 --- !u!114 &6041635862384210245
 MonoBehaviour:
   m_ObjectHideFlags: 0

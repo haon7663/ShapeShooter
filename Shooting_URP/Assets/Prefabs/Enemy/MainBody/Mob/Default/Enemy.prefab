@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ProjectileCount: 0
   m_Damage: 50
-  m_ProjectileSpeed: 400
+  m_ProjectileSpeed: 650
   m_AttackDelay: 3
   m_BurstCount: 3
   m_BurstSpeed: 0.2
@@ -246,8 +246,8 @@ MonoBehaviour:
   m_BigUI: {fileID: 0}
   m_EnemyExplosion: {fileID: 0}
   defhp: 0
-  maxhp: 150
-  curhp: 150
+  maxhp: 180
+  curhp: 180
   exp: 10
   itemPer: 10
   m_DestoryParticle: {fileID: 7972528174872875722, guid: 9ac742c501e4d504d88302923e006f2d, type: 3}
@@ -441,10 +441,12 @@ MonoBehaviour:
   m_WallLayer:
     serializedVersion: 2
     m_Bits: 128
-  m_Speed: 95
+  m_Speed: 285
   m_RotateSpeed: 0.4
   m_Follow: {fileID: 0}
-  onMove: 1
+  m_PinnedPos: {x: 0, y: 0, z: 0}
+  m_FirstPinnedPos: {x: 0, y: 0, z: 0}
+  m_KineticPos: {x: 0, y: 0, z: 0}
 --- !u!114 &5598758653801502195
 MonoBehaviour:
   m_ObjectHideFlags: 0

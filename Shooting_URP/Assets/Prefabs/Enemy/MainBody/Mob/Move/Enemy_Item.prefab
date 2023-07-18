@@ -265,7 +265,7 @@ MonoBehaviour:
   m_WallLayer:
     serializedVersion: 2
     m_Bits: 128
-  m_Speed: 220
+  m_Speed: 325
   m_RotateSpeed: 0.9
   m_Follow: {fileID: 0}
   onMove: 1

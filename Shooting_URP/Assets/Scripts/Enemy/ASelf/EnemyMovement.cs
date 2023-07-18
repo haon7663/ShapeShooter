@@ -24,16 +24,16 @@ public class EnemyMovement : MonoBehaviour
     public float m_Speed;
     public float m_RotateSpeed = 0.4f;
 
-    private float m_PinnedX;
-    private float m_PinnedY;
-
     [HideInInspector] public Transform m_Follow;
-    [HideInInspector] public bool onMove = true;
+    [HideInInspector] public Vector3 m_PinnedPos;
+    [HideInInspector] public Vector3 m_FirstPinnedPos;
+    [HideInInspector] public Vector3 m_KineticPos;
+    [HideInInspector] public bool onFollow, onPinned;
+    [HideInInspector] public bool isPinned, isKinetic, isSideMove;
 
     private Transform m_Player;
-    bool onFollow, onPinned;
-    bool isPinned, isKinetic, isSideMove;
     float x, y;
+
 
     private void Awake()
     {
@@ -43,10 +43,9 @@ public class EnemyMovement : MonoBehaviour
     }
     private void OnEnable()
     {
-        onMove = true;
         m_EnemySprite = transform.GetChild(0);
-        m_PinnedX = -m_Camera.transform.position.x + transform.position.x - 10;
-        m_PinnedY = transform.position.y;
+        m_PinnedPos = new Vector3(transform.position.x - 15, transform.position.y);
+        m_FirstPinnedPos = m_PinnedPos;
 
         x = 0; y = 0;
         onFollow = false; onPinned = false; isKinetic = false;
@@ -59,7 +58,7 @@ public class EnemyMovement : MonoBehaviour
             case "SideMove":
                 isSideMove = true;
                 x = -1;
-                y = transform.position.y < 0 ? -4 : 4;
+                y = transform.position.y < 0 ? -1 : 1;
                 break;
 
             case "Pinned":
@@ -78,16 +77,14 @@ public class EnemyMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (!onMove) return;
-
         if (isKinetic)
         {
-            transform.position = Vector3.Lerp(transform.position, m_Follow.position + new Vector3(-6, m_PinnedY), Time.deltaTime * 4f);
+            transform.position = Vector3.Lerp(transform.position, m_Follow.position + m_KineticPos, Time.deltaTime * 4f);
             m_EnemySprite.Rotate(new Vector3(0, 0, 0.6f * m_RotateSpeed));
         }
         else if (isPinned)
         {
-            transform.position = Vector3.Lerp(transform.position, new Vector3(m_Player.transform.position.x + m_PinnedX, m_PinnedY), Time.deltaTime * 1.2f);
+            transform.position = Vector3.Lerp(transform.position, m_PinnedPos, Time.deltaTime * m_Speed / 100);
             m_EnemySprite.Rotate(new Vector3(0, 0, 0.6f * m_RotateSpeed));
         }
         else if (onFollow)
@@ -95,11 +92,12 @@ public class EnemyMovement : MonoBehaviour
             float angle = Mathf.Atan2(m_Player.position.y - transform.position.y, m_Player.position.x - transform.position.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
             m_Rigidbody2D.velocity = transform.right * m_Speed * Time.deltaTime;
+            transform.rotation = Quaternion.identity;
         }
         else
         {
             m_Rigidbody2D.velocity = new Vector2(x, y).normalized * m_Speed * Time.deltaTime;
-            if (onPinned && m_Player.transform.position.x + m_PinnedX > transform.position.x)
+            if (onPinned && m_PinnedPos.x > transform.position.x)
             {
                 x = 0;
                 isPinned = true;

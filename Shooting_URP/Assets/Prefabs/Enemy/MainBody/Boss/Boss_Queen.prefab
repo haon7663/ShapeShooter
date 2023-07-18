@@ -267,10 +267,17 @@ MonoBehaviour:
   m_WallLayer:
     serializedVersion: 2
     m_Bits: 128
-  m_Speed: 95
+  m_Speed: 255
   m_RotateSpeed: 0.4
   m_Follow: {fileID: 0}
-  onMove: 1
+  m_PinnedPos: {x: 0, y: 0, z: 0}
+  m_FirstPinnedPos: {x: 0, y: 0, z: 0}
+  m_KineticPos: {x: 0, y: 0, z: 0}
+  onFollow: 0
+  onPinned: 0
+  isPinned: 0
+  isKinetic: 0
+  isSideMove: 0
 --- !u!114 &2984456480813828933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,8 +403,9 @@ MonoBehaviour:
   - m_Name: SummonItem
     m_Object: {fileID: 7188178170633963433, guid: d5c0cf89e46be8b4d8f955aa21219fef, type: 3}
     m_Delay: 25
-    m_StartDelay: 40
+    m_StartDelay: 35
     delay: 0
+  m_BossPath: {fileID: 3626316512284033101, guid: ef90966074e8a9640822b57ea995ef63, type: 3}
   isShoting: 0
 --- !u!114 &8714623293790002120
 MonoBehaviour:
