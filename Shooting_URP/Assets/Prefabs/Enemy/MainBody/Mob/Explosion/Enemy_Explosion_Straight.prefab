@@ -144,7 +144,7 @@ MonoBehaviour:
   m_LineRenderer: {fileID: 0}
   m_FireLineRenderer: {fileID: 0}
   m_LookLineRenderer: {fileID: 0}
-  m_AngleCount: 3
+  m_AngleCount: 5
   m_Size: 0.9
   hitTime: 0
   isPlayer: 0
@@ -165,8 +165,8 @@ MonoBehaviour:
   m_BigUI: {fileID: 0}
   m_EnemyExplosion: {fileID: 4037466394832196588}
   defhp: 0
-  maxhp: 150
-  curhp: 150
+  maxhp: 125
+  curhp: 125
   exp: 10
   itemPer: 15
   m_DestoryParticle: {fileID: 7481689618429517493, guid: 3692069cbd405f0409bf14ec4f3750a0, type: 3}

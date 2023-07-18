@@ -17,6 +17,8 @@ public class Projectile : MonoBehaviour
     public float rotateSpeed;
     private Collider2D collisionCalled;
 
+    public bool isNotDestroy;
+
     private void Awake()
     {
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -44,28 +46,43 @@ public class Projectile : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(isPlayer && collision.CompareTag("Enemy") && collisionCalled != collision)
+        if (!isNotDestroy)
         {
-            collision.GetComponent<Health>().OnDamage(realDamage);
-            if(penetrateCount > 0)
+            if (isPlayer && collision.CompareTag("Enemy") && collisionCalled != collision)
             {
-                collisionCalled = collision;
-                realDamage *= 0.5f;
-                penetrateCount--;
+                collision.GetComponent<Health>().OnDamage(realDamage);
+                if (penetrateCount > 0)
+                {
+                    collisionCalled = collision;
+                    realDamage *= 0.5f;
+                    penetrateCount--;
+                }
+                else
+                {
+                    ActiveDown();
+                }
             }
-            else
+            else if (!isPlayer && collision.CompareTag("Player"))
+            {
+                collision.GetComponent<Health>().OnDamage(realDamage);
+                ActiveDown();
+            }
+            else if (collision.CompareTag("DestroyProjectile") || collision.CompareTag("Death") || (collision.CompareTag("Ultimate") && !isPlayer))
             {
                 ActiveDown();
             }
         }
-        else if (!isPlayer && collision.CompareTag("Player"))
+        else if(isNotDestroy)
         {
-            collision.GetComponent<Health>().OnDamage(realDamage);
-            ActiveDown();
-        }
-        else if (collision.CompareTag("DestroyProjectile") || collision.CompareTag("Death") || (collision.CompareTag("Ultimate") && !isPlayer))
-        {
-            ActiveDown();
+            if (!isPlayer && collision.CompareTag("Player"))
+            {
+                collision.GetComponent<Health>().OnDamage(realDamage);
+                ActiveDown();
+            }
+            else if (collision.CompareTag("DestroyProjectile")|| (collision.CompareTag("Ultimate") && !isPlayer))
+            {
+                ActiveDown();
+            }
         }
     }
     private void ActiveDown()

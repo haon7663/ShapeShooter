@@ -36,6 +36,7 @@ public class EnemyFire : MonoBehaviour
     private void Start()
     {
         m_Rotatement = GetComponent<EnemyRotatement>();
+        attackDelay = m_AttackDelay;
     }
 
     private void Update()

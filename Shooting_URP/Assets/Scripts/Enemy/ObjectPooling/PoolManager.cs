@@ -14,7 +14,7 @@ public class PoolManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        pools = new List<GameObject>[5];
+        pools = new List<GameObject>[10];
         for (int i = 0; i < m_Projectile.Length; i++)
         {
             pools[i] = new List<GameObject>();

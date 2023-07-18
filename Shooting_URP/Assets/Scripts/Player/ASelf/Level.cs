@@ -25,7 +25,7 @@ public class Level : MonoBehaviour
         m_DrawPolygon = GetComponent<DrawPolygon>();
         m_Health = GetComponent<Health>();
         m_Camera = Camera.main;
-        needExp = m_DrawPolygon.m_AngleCount * 30 - 50;
+        needExp = m_DrawPolygon.m_AngleCount * 40 - 50;
         m_ExpBar = m_ExpImage.transform.parent;
 
         m_PersentHp = (m_DrawPolygon.m_AngleCount - 3) * 0.1f + 1;
@@ -41,7 +41,7 @@ public class Level : MonoBehaviour
 
         m_Health.maxhp = m_Health.defhp * m_PersentHp;
 
-        needExp = m_DrawPolygon.m_AngleCount * 30 - 40;
+        needExp = m_DrawPolygon.m_AngleCount * 40 - 50;
 
         m_ExpBar.position = m_Camera.WorldToScreenPoint(transform.position + new Vector3(-0.4f, -0.5f));
         expLerp = Mathf.Lerp(expLerp, m_Exp / needExp, Time.deltaTime * 25);

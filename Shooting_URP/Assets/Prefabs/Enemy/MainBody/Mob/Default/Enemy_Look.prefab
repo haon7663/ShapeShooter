@@ -442,7 +442,7 @@ MonoBehaviour:
   m_WallLayer:
     serializedVersion: 2
     m_Bits: 128
-  m_Speed: 65
+  m_Speed: 95
   m_RotateSpeed: 0.4
   m_Follow: {fileID: 0}
   onMove: 1
