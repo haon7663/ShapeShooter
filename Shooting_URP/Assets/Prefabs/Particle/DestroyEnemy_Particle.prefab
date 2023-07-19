@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7972528174872875721}
   - component: {fileID: 7972528174872875720}
   - component: {fileID: 7972528174872875723}
+  - component: {fileID: 4058708704759922986}
   m_Layer: 0
   m_Name: DestroyEnemy_Particle
   m_TagString: Untagged
@@ -44,7 +45,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 1
   simulationSpeed: 1
-  stopAction: 2
+  stopAction: 1
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -4871,6 +4872,18 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &4058708704759922986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7972528174872875722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed13cd5a53c7adc4a8dabd4aaf7a2f6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7972528175812981502
 GameObject:
   m_ObjectHideFlags: 0

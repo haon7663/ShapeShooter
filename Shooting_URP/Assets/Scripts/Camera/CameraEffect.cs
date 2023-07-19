@@ -22,7 +22,11 @@ public class CameraEffect : MonoBehaviour
         m_Vignette.enabled.Override(true);
         m_Vignette.intensity.Override(0f);
         m_Volume = PostProcessManager.instance.QuickVolume(gameObject.layer, 100f, m_Vignette);
+        ChangeColor();
+    }
 
+    public void ChangeColor()
+    {
         Camera.main.backgroundColor = m_Colors[GameManager.instance.m_StageCount];
     }
 

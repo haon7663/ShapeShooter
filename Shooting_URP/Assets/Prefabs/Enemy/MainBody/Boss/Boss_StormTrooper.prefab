@@ -188,14 +188,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SkillStruct:
+  - m_Name: SummonItem
+    m_Object: {fileID: 576120725385853552, guid: 658e1f1b51104b04db987327757bc8b1, type: 3}
+    m_Delay: 45
+    m_StartDelay: 2.5
+    delay: 0
+  - m_Name: SummonSideMove
+    m_Object: {fileID: 220029532660080928, guid: d4b830399d35d074b97c627d56cfd45a, type: 3}
+    m_Delay: 45
+    m_StartDelay: 16.01
+    delay: 0
   - m_Name: LineSaw
     m_Object: {fileID: 0}
     m_Delay: 25
     m_StartDelay: 15
     delay: 0
+  - m_Name: SwipeSaw
+    m_Object: {fileID: 0}
+    m_Delay: 45
+    m_StartDelay: 25
+    delay: 0
   - m_Name: RotateSaw
     m_Object: {fileID: 0}
-    m_Delay: 50
+    m_Delay: 34
     m_StartDelay: 3
     delay: 0
   - m_Name: SummonFollowExplosion
@@ -214,14 +229,9 @@ MonoBehaviour:
     m_StartDelay: 30
     delay: 0
   - m_Name: RushAndRotate
-    m_Object: {fileID: 0}
+    m_Object: {fileID: 1883809881503290304, guid: 0732ab9e83ad2894ba133d5b464995bc, type: 3}
     m_Delay: 35
     m_StartDelay: 16
-    delay: 0
-  - m_Name: SummonItem
-    m_Object: {fileID: 576120725385853552, guid: 658e1f1b51104b04db987327757bc8b1, type: 3}
-    m_Delay: 30
-    m_StartDelay: 2.5
     delay: 0
   m_BossPath: {fileID: 3626316512284033101, guid: ef90966074e8a9640822b57ea995ef63, type: 3}
   isShoting: 0
@@ -316,6 +326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Bundle: {fileID: 0}
+  m_PanelName: CLEAR!
   m_BossName: storm trooper
   isPlayer: 0
 --- !u!50 &4820575908461382636

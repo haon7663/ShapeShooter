@@ -265,10 +265,17 @@ MonoBehaviour:
   m_WallLayer:
     serializedVersion: 2
     m_Bits: 128
-  m_Speed: 325
+  m_Speed: 250
   m_RotateSpeed: 0.9
   m_Follow: {fileID: 0}
-  onMove: 1
+  m_PinnedPos: {x: 0, y: 0, z: 0}
+  m_FirstPinnedPos: {x: 0, y: 0, z: 0}
+  m_KineticPos: {x: 0, y: 0, z: 0}
+  onFollow: 0
+  onPinned: 0
+  isPinned: 0
+  isKinetic: 0
+  isSideMove: 0
 --- !u!114 &5061576509595204987
 MonoBehaviour:
   m_ObjectHideFlags: 0

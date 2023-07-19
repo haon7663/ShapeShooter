@@ -14,6 +14,7 @@ public class BigUI : MonoBehaviour
     private Text m_AngleText;
     private Text m_NameText;
 
+    public string m_PanelName;
     public string m_BossName;
     public bool isPlayer;
 
@@ -52,7 +53,7 @@ public class BigUI : MonoBehaviour
 
     private void OnDisable()
     {
-        GameManager.instance.m_DeathZone.SetActive(false);
         GameManager.instance.m_StageResult.SetActive(true);
+        GameManager.instance.m_StageResult.GetComponent<StageResult>().m_Result.text = m_PanelName;
     }
 }

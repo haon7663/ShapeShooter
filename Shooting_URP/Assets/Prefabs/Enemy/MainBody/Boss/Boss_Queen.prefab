@@ -291,6 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Bundle: {fileID: 0}
+  m_PanelName: STAGE RESULT
   m_BossName: QUEEN
   isPlayer: 0
 --- !u!50 &2984456480813828931
@@ -360,6 +361,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SkillStruct:
+  - m_Name: SummonItem
+    m_Object: {fileID: 7188178170633963433, guid: d5c0cf89e46be8b4d8f955aa21219fef, type: 3}
+    m_Delay: 40
+    m_StartDelay: 45
+    delay: 0
   - m_Name: TripleSpread
     m_Object: {fileID: 0}
     m_Delay: 7
@@ -399,11 +405,6 @@ MonoBehaviour:
     m_Object: {fileID: 7188178170633963433, guid: d5c0cf89e46be8b4d8f955aa21219fef, type: 3}
     m_Delay: 25
     m_StartDelay: 12
-    delay: 0
-  - m_Name: SummonItem
-    m_Object: {fileID: 7188178170633963433, guid: d5c0cf89e46be8b4d8f955aa21219fef, type: 3}
-    m_Delay: 25
-    m_StartDelay: 35
     delay: 0
   m_BossPath: {fileID: 3626316512284033101, guid: ef90966074e8a9640822b57ea995ef63, type: 3}
   isShoting: 0

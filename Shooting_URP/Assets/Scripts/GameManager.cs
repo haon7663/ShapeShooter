@@ -60,7 +60,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(Waving());
-        stage = GameManager.instance.m_StageCount;
     }
 
     private void Update()
@@ -75,20 +74,29 @@ public class GameManager : MonoBehaviour
         m_TimeText.text = "TIME: " + string.Format("{0:D2}:{1:D2}", (int)m_Minutes, (int)m_Seconds);
     }
 
-    private IEnumerator Waving()
+    public IEnumerator Waving()
     {
-        yield return YieldInstructionCache.WaitForSeconds(4f);
+        stage = m_StageCount;
+        yield return YieldInstructionCache.WaitForSeconds(2f);
         int EnemyCount = 0;
         for(float i = 0; i < m_StageStruct[stage].m_Wave[m_WaveCount].m_DetailEnemy[m_StageStruct[stage].m_Wave[m_WaveCount].m_DetailEnemy.Length-1].m_DelayTime + 0.5f; i += Time.deltaTime)
         {
-            var detail = m_StageStruct[stage].m_Wave[m_WaveCount].m_DetailEnemy;
-            if (detail.Length > EnemyCount && !detail[EnemyCount].isCalled && i > detail[EnemyCount].m_DelayTime)
+            if(!m_StageResult.activeSelf)
             {
-                detail[EnemyCount].isCalled = true;
-                Instantiate(detail[EnemyCount].m_Enemy, (Vector2)m_Camera.transform.position + new Vector2(25, 0) + detail[EnemyCount].m_Position, Quaternion.identity);
-                EnemyCount++;
+                var detail = m_StageStruct[stage].m_Wave[m_WaveCount].m_DetailEnemy;
+                if (detail.Length > EnemyCount && !detail[EnemyCount].isCalled && i > detail[EnemyCount].m_DelayTime)
+                {
+                    detail[EnemyCount].isCalled = true;
+                    Instantiate(detail[EnemyCount].m_Enemy, (Vector2)m_Camera.transform.position + new Vector2(25, 0) + detail[EnemyCount].m_Position, Quaternion.identity);
+                    EnemyCount++;
+                }
+                yield return YieldInstructionCache.WaitForFixedUpdate;
             }
-            yield return YieldInstructionCache.WaitForFixedUpdate;
+            else
+            {
+                m_WaveCount = 0;
+                break;
+            }
         }
         while(Enemys.Count > 0) yield return YieldInstructionCache.WaitForFixedUpdate;
         if(++m_WaveCount < m_StageStruct[stage].m_Wave.Length)
@@ -101,9 +109,13 @@ public class GameManager : MonoBehaviour
     {
         GameObject select = null;
         int ran = Random.Range(1, 101);
-        if (ran <= persent)
+        if(persent >= 100)
         {
-            select = m_Items[Random.Range(0, m_Items.Length)];
+            select = m_Items[Random.Range(0, 3)];
+        }
+        else if (ran <= persent)
+        {
+            select = m_Items[Random.Range(3, m_Items.Length)];
         }
         return select;
     }
