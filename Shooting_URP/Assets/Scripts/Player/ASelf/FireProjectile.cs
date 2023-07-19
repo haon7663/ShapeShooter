@@ -18,6 +18,7 @@ public class FireProjectile : MonoBehaviour
 
     private Level m_Level;
     private DrawPolygon m_DrawPolygon;
+    private AudioSource m_AudioSource;
     private Transform m_ProjectileBundle;
 
     public AttackType m_AttackType;
@@ -60,6 +61,11 @@ public class FireProjectile : MonoBehaviour
 
         [Header("시작 포지션")]
         public float m_RightPos;
+
+        [Space]
+        [Header("오디오")]
+        public AudioClip m_AudioClip;
+        public float m_Volume;
     }
     public BulletStruct[] m_BulletStruct = new BulletStruct[1];
     public BulletStruct[] m_OriginStruct;
@@ -103,6 +109,7 @@ public class FireProjectile : MonoBehaviour
     {
         m_Level = transform.parent.GetComponentInChildren<Level>();
         m_DrawPolygon = transform.parent.GetComponentInChildren<DrawPolygon>();
+        m_AudioSource = GetComponent<AudioSource>();
         m_ProjectileBundle = GameObject.FindGameObjectWithTag("ProjectileBundle").transform;
         pools = new List<GameObject>();
 
@@ -215,6 +222,9 @@ public class FireProjectile : MonoBehaviour
 
     private IEnumerator Shot(int k)
     {
+        m_AudioSource.clip = m_BulletStruct[typeCount].m_AudioClip;
+        m_AudioSource.volume = m_BulletStruct[typeCount].m_Volume;
+        m_AudioSource.Play();
         attackDelay = m_BulletStruct[typeCount].m_AttackDelay;
         for (int i = 0; i < m_BulletStruct[typeCount].m_BurstCount; i++)
         {

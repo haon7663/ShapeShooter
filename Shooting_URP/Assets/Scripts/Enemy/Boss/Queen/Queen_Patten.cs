@@ -31,6 +31,8 @@ public class Queen_Patten : MonoBehaviour
 
     private void Start()
     {
+        BackGroundMusic.instance.Switch(1);
+
         m_EnemyMovement = GetComponentInParent<EnemyMovement>();
         m_EnemyRotatement = GetComponent<EnemyRotatement>();
         m_DrawPolygon = transform.parent.GetChild(0).GetComponent<DrawPolygon>();

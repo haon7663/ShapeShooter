@@ -7,11 +7,13 @@ public class SinMove : MonoBehaviour
     [SerializeField] private float m_Speed;
     [SerializeField] private float m_Length;
 
+    private Camera m_Camera;
     Vector2 savePos;
     float sinTimer;
 
     private void Start()
     {
+        m_Camera = Camera.main;
         savePos = transform.position;
     }
     private void Update()

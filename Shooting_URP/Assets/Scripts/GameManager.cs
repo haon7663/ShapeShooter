@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
     public GameObject m_DeathZone;
     public Text m_ScoreText;
     public Text m_TimeText;
+    public Text m_StageText;
 
     private Camera m_Camera;
 
@@ -60,11 +61,19 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(Waving());
+        SetResolution();
+    }
+
+    public void SetResolution()
+    {
+        int setWidth = 1920;
+        int setHeight = 1080;
+        Screen.SetResolution(setWidth, setHeight, true);
     }
 
     private void Update()
     {
-        m_Seconds += Time.deltaTime;
+        if(!m_StageResult.activeSelf) m_Seconds += Time.deltaTime;
         if((int)m_Seconds >= 60)
         {
             m_Seconds = 0;
@@ -72,6 +81,7 @@ public class GameManager : MonoBehaviour
         }
         m_ScoreText.text = "SCORE: " + m_DestroyScore.ToString();
         m_TimeText.text = "TIME: " + string.Format("{0:D2}:{1:D2}", (int)m_Minutes, (int)m_Seconds);
+        m_StageText.text = "Stage " + (m_StageCount+1).ToString();
     }
 
     public IEnumerator Waving()
@@ -103,6 +113,12 @@ public class GameManager : MonoBehaviour
         {
             StartCoroutine(Waving());
         }
+        yield return null;
+    }
+
+    public void WavingD()
+    {
+        StartCoroutine(Waving());
     }
 
     public GameObject ItemPersent(int persent)

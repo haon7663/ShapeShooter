@@ -53,6 +53,7 @@ public class BigUI : MonoBehaviour
 
     private void OnDisable()
     {
+        BackGroundMusic.instance.Switch(0);
         GameManager.instance.m_StageResult.SetActive(true);
         GameManager.instance.m_StageResult.GetComponent<StageResult>().m_Result.text = m_PanelName;
     }

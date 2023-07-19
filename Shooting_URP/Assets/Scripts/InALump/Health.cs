@@ -5,6 +5,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     private DrawPolygon m_DrawPolygon;
+    private AudioSource m_AudioSource;
     private Level m_PlayerLevel;
     [HideInInspector] public FollowUI m_FollowUI;
     [HideInInspector] public BigUI m_BigUI;
@@ -24,6 +25,7 @@ public class Health : MonoBehaviour
     private void Start()
     {
         m_DrawPolygon = GetComponent<DrawPolygon>();
+        m_AudioSource = GetComponent<AudioSource>();
         m_FollowUI = GetComponentInParent<FollowUI>();
         m_BigUI = GetComponentInParent<BigUI>();
         m_PlayerLevel = GameObject.FindGameObjectWithTag("Player").GetComponent<Level>();
@@ -38,14 +40,16 @@ public class Health : MonoBehaviour
     public void OnDamage(float dam)
     {
         if (isInvisble) return;
+
+        if(!m_AudioSource.isPlaying) m_AudioSource.Play();
         curhp -= dam;
         m_DrawPolygon.OnDamage();
         if (isPlayer) StartCoroutine(CameraEffect.instance.OnDamage());
         if (curhp <= 0)
         {
-            curhp = maxhp;
             m_DrawPolygon.m_AngleCount--;
             m_DrawPolygon.ChangeAngle();
+            curhp = maxhp;
             if (m_DrawPolygon.m_AngleCount < 3)
             {
                 Death(true);
@@ -86,7 +90,7 @@ public class Health : MonoBehaviour
         else
         {
             GameManager.instance.Enemys.Remove(transform.parent.gameObject);
-            Instantiate(m_DestoryParticle, transform.position, Quaternion.identity);
+            if(onExp) Instantiate(m_DestoryParticle, transform.position, Quaternion.identity);
             transform.parent.gameObject.SetActive(false);
         }
     }

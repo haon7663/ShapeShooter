@@ -14,18 +14,18 @@ public class AudioOptions : MonoBehaviour
 
     private void Start()
     {
-        MasterSlider.value = PlayerPrefs.GetFloat("Master");
-        BgmSlider.value = PlayerPrefs.GetFloat("BGM");
-        SfxSlider.value = PlayerPrefs.GetFloat("SFX");
-        SetMasterVolme();
-        SetBgmVolme();
-        SetSFXVolme();
-    }
-    private void OnDisable()
-    {
-        MasterSlider.value = PlayerPrefs.GetFloat("Master");
-        BgmSlider.value = PlayerPrefs.GetFloat("BGM");
-        SfxSlider.value = PlayerPrefs.GetFloat("SFX");
+        if(PlayerPrefs.HasKey("Master"))
+        {
+            MasterSlider.value = PlayerPrefs.GetFloat("Master");
+            BgmSlider.value = PlayerPrefs.GetFloat("BGM");
+            SfxSlider.value = PlayerPrefs.GetFloat("SFX");
+        }
+        else
+        {
+            PlayerPrefs.SetFloat("Master", -11.5f);
+            PlayerPrefs.SetFloat("BGM", -13.5f);
+            PlayerPrefs.SetFloat("SFX", -18f);
+        }
         SetMasterVolme();
         SetBgmVolme();
         SetSFXVolme();

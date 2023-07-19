@@ -15,7 +15,7 @@ public class Invisble_Item : Item
     }
     public override void GetItem()
     {
-        m_Ultimate.m_InvisbleTime = 5;
+        if(m_Ultimate.m_InvisbleTime < 5) m_Ultimate.m_InvisbleTime = 5;
         Destroy(gameObject);
     }
 }

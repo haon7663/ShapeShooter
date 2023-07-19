@@ -33,6 +33,8 @@ public class StormTrooper_Patten : MonoBehaviour
 
     private void Start()
     {
+        BackGroundMusic.instance.Switch(2);
+
         m_Player = GameObject.FindGameObjectWithTag("Player").transform;
 
         m_EnemyMovement = GetComponentInParent<EnemyMovement>();
@@ -123,9 +125,6 @@ public class StormTrooper_Patten : MonoBehaviour
         isShoting = true;
         yield return StartCoroutine(BossMove(m_Player.position, 0.75f));
         yield return StartCoroutine(BossMove(m_Player.position, 0.5f));
-
-        Instantiate(m_SkillStruct[value].m_Object, new Vector3(25f, 4), Quaternion.identity);
-        Instantiate(m_SkillStruct[value].m_Object, new Vector3(25f, -4), Quaternion.identity);
 
         float saveSpeed = m_EnemyMovement.m_Speed;
         float saveRotateSpeed = m_EnemyMovement.m_RotateSpeed;
@@ -242,7 +241,6 @@ public class StormTrooper_Patten : MonoBehaviour
         path.m_Time = time;
         path.m_Follow = transform;
 
-        float j = 0;
         yield return YieldInstructionCache.WaitForSeconds(time);
 
         m_EnemyMovement.m_PinnedPos = pos;

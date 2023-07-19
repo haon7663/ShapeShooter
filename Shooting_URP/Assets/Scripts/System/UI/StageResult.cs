@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class StageResult : MonoBehaviour
 {
-    private Ultimate m_Ultimate;
+    public Ultimate m_Ultimate;
     private Animator m_Animator;
     
     public Text m_Result;
@@ -23,7 +23,6 @@ public class StageResult : MonoBehaviour
 
     private void Awake()
     {
-        m_Ultimate = GameObject.FindGameObjectWithTag("Player").GetComponent<Ultimate>();
         m_Animator = GetComponent<Animator>();
     }
     private void OnEnable()
@@ -32,7 +31,7 @@ public class StageResult : MonoBehaviour
     }
     public IEnumerator OnResult()
     {
-        m_Ultimate.m_InvisbleTime = 99999;
+        if(m_Ultimate.transform.parent.gameObject.activeSelf) m_Ultimate.m_InvisbleTime = 99999;
         yield return YieldInstructionCache.WaitForSeconds(2f);
         for (int i = 0; i < 3; i++)
         {
@@ -74,6 +73,15 @@ public class StageResult : MonoBehaviour
                 yield return YieldInstructionCache.WaitForFixedUpdate;
             }
         }
+        if (m_Result.text == "CLEAR!")
+        {
+            m_ClickContinue.text = "-Click to Main -";
+        }
+        else
+        {
+            m_ClickContinue.text = "-Click to Continue -";
+        }
+
         yield return YieldInstructionCache.WaitForSeconds(1f);
         while (!Input.GetMouseButton(0))
         {
@@ -102,11 +110,15 @@ public class StageResult : MonoBehaviour
             GameManager.instance.m_WaveCount = 0;
             Camera.main.transform.GetComponent<CameraEffect>().ChangeColor();
             BackgroundScrolling.instance.SetColor();
-            StartCoroutine(GameManager.instance.Waving());
+            GameManager.instance.WavingD();
+        }
+        else if(m_Result.text == "CLEAR!")
+        {
+            UIManager.instance.GameStart("Main");
         }
         else
         {
-            UIManager.instance.GameStart("Main");
+            UIManager.instance.GameStart("InGame");
         }
 
         for (float i = 0; i < 0.5f; i += Time.deltaTime)
@@ -118,7 +130,7 @@ public class StageResult : MonoBehaviour
             }
             yield return YieldInstructionCache.WaitForFixedUpdate;
         }
-        m_Ultimate.m_InvisbleTime = 2;  
+        if (m_Ultimate.transform.parent.gameObject.activeSelf) m_Ultimate.m_InvisbleTime = 2;  
         yield return null;
     }
 
