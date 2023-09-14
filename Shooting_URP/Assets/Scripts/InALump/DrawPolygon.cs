@@ -65,11 +65,14 @@ public class DrawPolygon : MonoBehaviour
         int lastIndex = 0;
         for (var i = 0; i < m_AngleCount; i++)
         {
-            saveLerp[i] = Vector2.Lerp(saveLerp[i], new Vector3(m_Size * Mathf.Sin(angle * i * Mathf.Deg2Rad), m_Size * Mathf.Cos(angle * i * Mathf.Deg2Rad)), Time.deltaTime * 9f);
-            m_LineRenderer.SetPosition(i, saveLerp[i]);
+            saveLerp[i] = Vector2.Lerp(saveLerp[i], new Vector3(m_Size * Mathf.Sin(angle * i * Mathf.Deg2Rad), 
+                                                                m_Size * Mathf.Cos(angle * i * Mathf.Deg2Rad)), Time.deltaTime * 9f);
+            m_LineRenderer.SetPosition(i, saveLerp[i]); //라인렌더러 다각형 구현
+
             var myPoints = m_PolygonCollider2D.points;
-            myPoints[i] = new Vector2(size * Mathf.Sin(angle * i * Mathf.Deg2Rad), size * Mathf.Cos(angle * i * Mathf.Deg2Rad)) * (isPlayer ? 0.5f : 1f);
-            m_PolygonCollider2D.points = myPoints;
+            myPoints[i] = new Vector2(size * Mathf.Sin(angle * i * Mathf.Deg2Rad), 
+                                      size * Mathf.Cos(angle * i * Mathf.Deg2Rad)) * (isPlayer ? 0.5f : 1f);
+            m_PolygonCollider2D.points = myPoints; //폴리곤콜라이더 다각형 구현
             lastIndex++;
         }
         var lastPoints = m_PolygonCollider2D.points;

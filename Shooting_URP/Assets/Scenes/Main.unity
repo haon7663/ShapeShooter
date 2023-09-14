@@ -924,6 +924,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b5bc10f4d9bd65243b56e20218638cf8, type: 3}
   - {fileID: 8300000, guid: cbcff4ab684a89343a147a88a9a3b886, type: 3}
   m_MixerGroup: {fileID: -4116613920137596212, guid: 1a790b792bbfe8249b5226f9447b6d70, type: 2}
+  m_Volume:
+  - 1
+  - 0.3
+  - 0.4
 --- !u!4 &154186569
 Transform:
   m_ObjectHideFlags: 0

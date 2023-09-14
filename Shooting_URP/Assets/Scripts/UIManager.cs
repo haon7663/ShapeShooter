@@ -35,7 +35,7 @@ public class UIManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Pause();
+            if(!Fade.instance.m_Image.enabled) Pause();
         }
     }
     public void Pause()

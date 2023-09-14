@@ -35,14 +35,17 @@ public class Weapon_Item : Item
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         m_Rigidbody2D.AddForce(Vector2.left * 150);
     }
+
     public override void GetItem()
     {
         m_FirePorjectile.SetWeapon(m_AttackType);
+
         m_CircleCollider2D.enabled = false;
         m_SpriteRenderer.enabled = false;
         m_AudioSource.Play();
         Destroy(gameObject, 0.6f);
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Death"))

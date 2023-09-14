@@ -12,17 +12,10 @@ public class BackGroundMusic : MonoBehaviour
 
     private AudioSource[] audioSources;
 
+    public float[] m_Volume;
+
     private void Awake()
     {
-        var obj = FindObjectsOfType<BackGroundMusic>();
-        if (obj.Length == 1)
-        {
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
         instance = this;
     }
 
@@ -46,7 +39,7 @@ public class BackGroundMusic : MonoBehaviour
     {
         for (int i = 0; i < m_AudioClips.Length; i++)
         {
-            StartCoroutine(AudioFade(audioSources[i], i == index ? 1 : 0));
+            StartCoroutine(AudioFade(audioSources[i], i == index ? m_Volume[i] : 0));
         }
     }
 

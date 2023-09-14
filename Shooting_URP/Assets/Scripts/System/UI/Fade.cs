@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class Fade : MonoBehaviour
 {
     public static Fade instance;
+    public Image m_Image;
     private Animator m_Animator;
 
     public string m_SceneName;
@@ -14,6 +15,7 @@ public class Fade : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        m_Image = GetComponent<Image>();
         m_Animator = GetComponent<Animator>();
     }
     public void FadeIn(string sceneName)
